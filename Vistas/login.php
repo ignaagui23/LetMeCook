@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let Me Cook - Login / Registro</title>
-    <link rel="stylesheet" href="../Estilos/style.css">
-    <style>
+    <link rel="stylesheet" href="../Estilos/styles.css">
+        <style>
         .oculto { display: none; }
     </style>
 </head>
