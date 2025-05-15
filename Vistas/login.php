@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let Me Cook - Login / Registro</title>
-    <link rel="stylesheet" href="../Estilos/styles.css">
-        <style>
-        .oculto { display: none; }
-    </style>
-</head>
+<link rel="stylesheet" href="../Estilos/styles.css"></head>
 <body>
     <div class="formularios">
         <form id="form-login" action="../Modelos/login.php" method="POST">

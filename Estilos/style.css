@@ -1,50 +1,91 @@
-.oculto { display: none; }
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #fff;
-  color: #333;
-}
-
-.formularios {
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 40px;
-  background-color: #f1f1f1;
-  border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  color: #db4437;
-  margin-bottom: 30px;
-}
-
-input {
-  width: 100%;
-  padding: 12px 15px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 15px;
-  background-color: #e0e0e0;
-  font-size: 1rem;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 15px;
-  background-color: #da443f;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #c6382e;
-}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  body {
+    background-color: white;
+    color: #444;
+  }
+  
+  header {
+    background-color: #dc4b3e;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .menu-icon {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .menu-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    border-radius: 2px;
+  }
+  
+  .logo img {
+    height: 100px;
+  }
+  
+  main {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ddd;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .card {
+    width: 180px;
+    height: 280px;
+    border-radius: 25px;
+    background-color: #e77a74;
+  }
+  
+  .card.center {
+    background-color: #dc4b3e;
+  }
+  
+  .card.image {
+    background-image: url("Hambuergruesa.jfif");
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 25%;
+  }
+  

@@ -4,20 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Let Me Cook</title>
-  <link rel="stylesheet" href="Estilos/styles.css">
+  <link rel="stylesheet" href="../Estilos/styles.css">
 </head>
 <body>
-  <header>
-    <div class="menu-icon">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="logo">
-      <img src="Img/Logo Gastronomía Vegana Minimalista Verde.png" alt="Let Me Cook">
-    </div>
-  </header>
-
+<?php include 'header.php'; ?>
   <main>
     <h2>Recomendadas</h2>
     <div class="carousel">

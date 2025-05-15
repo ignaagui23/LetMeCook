@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $usuario = $resultado->fetch_assoc();
             $_SESSION["usuario"] = $usuario["username"];
             $_SESSION["es_admin"] = $usuario["is_admin"];
-            header("Location: ../Vistas/pagina_principal.php");
+            header("Location: ../Vistas/index.html");
             exit();
         } else {
             echo "Usuario o contraseña incorrectos.";
