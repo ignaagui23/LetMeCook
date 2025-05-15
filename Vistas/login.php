@@ -6,9 +6,12 @@
     <title>Let Me Cook - Login / Registro</title>
 <link rel="stylesheet" href="../Estilos/styles.css"></head>
 <body>
+    <?php include 'header.php'; ?>
+<main>  
+                <h2>Iniciar Sesión</h2>
+    
     <div class="formularios">
         <form id="form-login" action="../Modelos/login.php" method="POST">
-            <h2>Iniciar Sesión</h2>
             <input type="text" name="username" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
             <button type="submit" name="login">Ingresar</button>
@@ -25,7 +28,7 @@
             <button type="button" onclick="mostrarLogin()">Cancelar</button>
         </form>
     </div>
-
+</main>
     <script>
         function mostrarRegistro() {
             document.getElementById('form-login').classList.add('oculto');
