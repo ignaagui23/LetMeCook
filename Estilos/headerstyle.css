@@ -118,3 +118,24 @@
       width: 20px;
       height: 20px;
     }
+
+    .user-info {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-pic {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.username {
+  font-weight: bold;
+  color: #fff;
+  font-size: larger;
+}
