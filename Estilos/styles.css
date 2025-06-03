@@ -119,11 +119,12 @@ main {
 }
 
 .card {
-  width: 40vw;
-  height: 55vw;
-  max-height: 280px;
-  border-radius: 1.5rem;
-  background-color: #e77a74;
+    width: 40vw;
+    height: 55vw;
+    max-height: 400px;
+    border-radius: 1.5rem;
+    background-color: #e77a74;
+    max-width: 275px;
 }
 
 .card.center {
