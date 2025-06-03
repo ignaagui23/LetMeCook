@@ -15,6 +15,12 @@
     <div class="logo">
       <img src="../Img/LogoLetMeCook.png" alt="Logo Let Me Cook">
     </div>
+     <div class="user-info">
+    <span class="username">
+      <?php echo isset($_SESSION["usuario"]) ? htmlspecialchars($_SESSION["usuario"]) : "Invitado"; ?>
+    </span>
+        <img src="../Img/pfp.jpg" alt="Foto de perfil" class="user-pic">
+  </div>
   </header>
 
   <div class="overlay" id="overlay" onclick="closeSidebar()"></div>

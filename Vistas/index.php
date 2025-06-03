@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,7 +15,7 @@
   <link rel="stylesheet" href="../Estilos/styles.css">
 </head>
 <body>
-<?php include 'header.php'; ?>
+  <?php include 'header.php'; ?>
   <main>
     <h2>Recomendadas</h2>
     <div class="carousel">
