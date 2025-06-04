@@ -24,6 +24,7 @@ $sql = "SELECT r.id, r.titulo, r.descripcion, r.imagen, r.tiempo_preparacion,
         ORDER BY $orderClause";
 
 
+
 $resultado = $conn->query($sql);
 ?>
 
