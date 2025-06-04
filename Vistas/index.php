@@ -13,6 +13,7 @@ if (!isset($_SESSION["usuario"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Let Me Cook</title>
   <link rel="stylesheet" href="../Estilos/styles.css">
+  <link rel="stylesheet" href="../Estilos/style_index.css">
 </head>
 <body>
   <?php include 'header.php'; ?>

@@ -1,0 +1,61 @@
+/* Generic Form Styles */
+.formularios,
+.formulario {
+  background-color: #f1f1f1;
+  border-radius: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;  border: 2px solid #c6382e;
+  display: flex;
+  flex-direction: column;
+}
+
+.formularios {
+  align-self: center;
+  width: 90%;
+  max-width: 30rem;
+  padding: 3rem;
+}
+
+.formularios input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin: 0.6rem 0 0.6rem 0;
+  border: none;
+  border-radius: 1rem;
+  background-color: #d6d6d6;
+  border: #d4847f 1px solid;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+}
+
+.formulario {
+  padding: 2rem;
+  width: 28%;
+  max-width: 90vw;
+}
+
+/* Hide utility */
+.oculto {
+  display: none;
+}
+
+label {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #db4437;
+  user-select: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #da443f;
+  color: #fff;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+  user-select: none;
+  width: 100%;
+}

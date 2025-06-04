@@ -1,0 +1,113 @@
+
+
+.formulario {
+  background-color: #f1f1f1;
+  border-radius: 1.5rem;
+  border: 2px solid #c6382e;
+  padding: 2rem;
+
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
+  height: auto;
+  max-height: none;
+  min-height: 600px; /* o más si querés más espacio visible */
+
+  margin: 1rem auto; /* Esto centra horizontalmente */
+  
+  box-shadow:
+    rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tarjeta-scroll {
+  max-height: none;
+  overflow-y: visible;
+}
+
+.tarjeta-ingrediente {
+  border: 2px dashed #db4437;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: #fff7f6;
+  margin-bottom: 0.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.fila-ingrediente {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.unidad-span {
+  font-weight: bold;
+  color: #c6382e;
+}
+
+.contenedor-horizontal {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.btn-agregar {
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+}
+
+.btn-eliminar {
+  background-color: #f44336;
+  color: white;
+  margin-top: 0.2rem;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.btn-eliminar:hover {
+  background-color: #d32f2f;
+}
+
+.campo-paso {
+  margin-bottom: 0.2rem;
+  background-color: #fff0ee;
+  border: 2px dashed #db4437;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.campo-paso textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d4847f;
+}
+
+
+.tarjeta-ingrediente select,
+.tarjeta-ingrediente input {
+  font-size: 1rem;
+  padding: 0.5rem;
+  min-height: 40px;
+}
+
+/* Si querés que haya un scrollbar solo cuando hay muchos pasos o ingredientes */
+#pasos-container,
+#ingredientes-container {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}

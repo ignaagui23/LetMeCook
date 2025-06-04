@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let Me Cook - Login / Registro</title>
-<link rel="stylesheet" href="../Estilos/styles.css"></head>
+<link rel="stylesheet" href="../Estilos/styles.css">
+<link rel="stylesheet" href="../Estilos/style_login.css">
+    <link rel="icon" href="../Img/LogoLetMeCook.png" type="image/png">
+
+</head>
 <body>
     <?php include 'header.php'; ?>
 <main>  
