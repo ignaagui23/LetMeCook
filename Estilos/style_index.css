@@ -1,48 +1,87 @@
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
 
-.arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 10vw;
-  max-width: 3rem;
-  height: 10vw;
-  max-height: 3rem;
-  border-radius: 50%;
-  background-color: #ddd;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    max-width: 3rem;
+    height: 10vw;
+    max-height: 3rem;
+    border-radius: 50%;
+    background-color: #ddd;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
 
-.card-container {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card {
-  width: 40vw;
-  height: 55vw;
-  max-width: 275px;
-  max-height: 400px;
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1 1 250px;
+    max-width: 28%;
+    transition: transform 0.3s;
+  }
+.card-receta {
+  aspect-ratio: 2 / 3;
+  min-width: 220px;
+  max-width: 300px;
+  background-color: #f1f1f1;
   border-radius: 1.5rem;
-  background-color: #e77a74;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, 
+              rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
+              rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border: 2px solid #c6382e;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
 }
 
-.card.center {
-  background-color: #dc4b3e;
+.card-receta:hover {
+  transform: scale(1.02);
 }
 
-.card.image {
-  background-image: url("Hambuergruesa.jfif");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.card-img {
+  width: 100%;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-contenido {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-contenido h3 {
+  font-size: 1.2rem;
+  color: #c6382e;
+  margin-bottom: 0.5rem;
+}
+
+.card-contenido p {
+  font-size: 1rem;
+  color: #444;
+  font-weight: bold;
 }

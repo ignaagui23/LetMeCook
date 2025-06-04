@@ -66,6 +66,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  font-weight: 600;
 }
 
 .sidebar.open {
@@ -95,6 +96,7 @@ header {
   align-items: center;
   justify-content: flex-start;
   transition: background-color 0.2s;
+  font-weight: bold;
 }
 
 .menu-options button:hover,
