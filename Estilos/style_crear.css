@@ -58,11 +58,12 @@
   padding: 2rem;
 }
 
-.btn-agregar {
+.btn-agregar, .btn-crear {
   background-color: #4CAF50;
   color: white;
   width: 100%;
 }
+
 
 .btn-eliminar {
   background-color: #f44336;

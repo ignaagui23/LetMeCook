@@ -53,14 +53,14 @@ if (isset($_GET['logout'])) {
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
     <path d="M3 12L12 3l9 9v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9z" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-  Volver al inicio
+  Inicio
 </button>
 
 <button onclick="window.location.href='crear_receta.php'" class="btn-agregar-receta">
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
     <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-  Agregar una receta
+  Crear receta
 </button>
 <button onclick="window.location.href='recetas.php'" class="btn-agregar-receta">
  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
