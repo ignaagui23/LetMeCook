@@ -5,31 +5,10 @@ if (!isset($_SESSION["usuario"])) {
     exit();
 }
 
-require_once('../Controlador/conexion.php');
+require_once('../Modelos/recetas.php');
 
-// Lógica de ordenamiento
 $orden = $_GET['orden'] ?? 'recientes';
-$orderClause = match ($orden) {
-    'alfabetico' => 'r.titulo ASC',
-    'tiempo'     => 'r.tiempo_preparacion ASC',
-    'ingredientes' => 'r.cantidad_ingredientes ASC',
-    default      => 'r.id DESC'
-};
-
-$sql = "SELECT r.id, r.titulo, r.descripcion, r.imagen, r.tiempo_preparacion,
-               COUNT(ri.ingrediente_id) AS cantidad_ingredientes,
-               u.username
-        FROM recetas r
-        LEFT JOIN receta_ingrediente ri ON r.id = ri.receta_id
-        JOIN usuarios u ON r.usuario_id = u.id
-        GROUP BY r.id
-        ORDER BY $orderClause";
-
-
-
-
-
-$resultado = $conn->query($sql);
+$resultado = obtenerRecetas($orden);
 ?>
 
 <!DOCTYPE html>
@@ -61,21 +40,20 @@ $resultado = $conn->query($sql);
     <div class="grid-recetas">
       <?php while ($row = $resultado->fetch_assoc()): ?>
         <a href="receta.php?id=<?= $row['id'] ?>" class="card-link">
-       <div class="card-receta">
-  <div class="card-img">
-    <img src="../Img/imgrecetas/<?= htmlspecialchars($row['imagen']) ?>" alt="<?= htmlspecialchars($row['titulo']) ?>">
-  </div>
-  <div class="card-contenido">
-    <h3><?= htmlspecialchars($row['titulo']) ?></h3>
-    <hr>
-    <p><?= htmlspecialchars($row['descripcion']) ?></p>
-    <small>
-      <?= $row['tiempo_preparacion'] ?> min | 
-      <?= $row['cantidad_ingredientes'] ?> ingredientes |
-      por <strong><?= htmlspecialchars($row['username']) ?></strong>
-    </small>
-  </div>
-
+          <div class="card-receta">
+            <div class="card-img">
+              <img src="../Img/imgrecetas/<?= htmlspecialchars($row['imagen']) ?>" alt="<?= htmlspecialchars($row['titulo']) ?>">
+            </div>
+            <div class="card-contenido">
+              <h3><?= htmlspecialchars($row['titulo']) ?></h3>
+              <hr>
+              <p><?= htmlspecialchars($row['descripcion']) ?></p>
+              <small>
+                <?= $row['tiempo_preparacion'] ?> min |
+                <?= $row['cantidad_ingredientes'] ?> ingredientes |
+                por <strong><?= htmlspecialchars($row['username']) ?></strong>
+              </small>
+            </div>
           </div>
         </a>
       <?php endwhile; ?>
