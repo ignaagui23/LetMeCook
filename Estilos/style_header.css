@@ -164,3 +164,7 @@ header {
   color: #fff;
   font-size: larger;
 }
+
+a {
+  text-decoration: none;
+}

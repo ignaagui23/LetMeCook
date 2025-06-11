@@ -1,0 +1,123 @@
+
+body {
+  background: #f4f6f8;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.cuenta-container {
+    
+  max-width: 700px;
+  margin: 60px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 30px;
+}
+
+.cuenta-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #222;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.alert.success {
+  background: #e6ffed;
+  border: 1px solid #8dd2a7;
+  color: #276745;
+}
+.alert.error {
+  background: #ffe6e6;
+  border: 1px solid #e29a9a;
+  color: #841919;
+}
+
+.info-cuenta {
+  background: #b4f08d;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+.info-cuenta strong {
+  width: 130px;
+}
+
+.form-section {
+  margin-bottom: 40px;
+}
+.form-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #444;
+}
+.form-section form {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.form-section label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: #555;
+}
+.form-section input[type="text"],
+.form-section input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+.form-section input:focus {
+  outline: none;
+  border-color: #7aaeff;
+}
+
+.button, .form-section button {
+  display: inline-block;
+  background: #b11b1b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.button:hover, .form-section button:hover {
+  background: #a32919;
+}
+
+.btn-danger {
+  background: #dc3545;
+}
+.btn-danger:hover {
+  background: #c82333;
+}
+
+@media (max-width: 600px) {
+  .cuenta-container {
+    margin: 30px 15px;
+    padding: 20px;
+  }
+  .form-section h2 {
+    font-size: 1.1rem;
+  }
+}

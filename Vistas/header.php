@@ -34,9 +34,10 @@ if (isset($_GET['logout'])) {
     </div>
 
     <?php if (isset($_SESSION["usuario"])): ?>
-      
       <div class="user-info">
+        <a href="cuenta.php">
         <span class="username"><?php echo htmlspecialchars($_SESSION["usuario"]); ?></span>
+        </a>
         <img src="../Img/pfp.jpg" alt="Foto de perfil" class="user-pic">
       </div>
     <?php endif; ?>
