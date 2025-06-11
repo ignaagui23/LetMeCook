@@ -4,6 +4,16 @@ if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
     exit();
 }
+
+include '../Controlador/conexion.php'; // Asegurate de tener conexión a la BD
+
+$query = "SELECT id, titulo, imagen, descripcion FROM recetas ORDER BY RAND() LIMIT 3";
+$resultado = mysqli_query($conn, $query);
+
+$recetas = [];
+while ($fila = mysqli_fetch_assoc($resultado)) {
+  $recetas[] = $fila;
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,59 +24,45 @@ if (!isset($_SESSION["usuario"])) {
   <title>Let Me Cook</title>
   <link rel="stylesheet" href="../Estilos/styles.css">
   <link rel="stylesheet" href="../Estilos/style_index.css">
+  <script>
+function scrollCarousel(direction) {
+  const container = document.getElementById('carouselContainer');
+  const scrollAmount = 320; // ajustá al ancho de tus cards
+
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
+</script>
+
+
 </head>
 <body>
   <?php include 'header.php'; ?>
   <main>
     <h2>Recomendadas</h2>
     <div class="carousel">
-      <button class="arrow left">&#x276E;</button>
-      <div class="card-container">
-<!-- Tarta de jamón y queso -->
-<a href="receta.php" class="card-link">
-  <div class="card-receta">
-    <div class="card-img">
-      <img src="../Img/imgrecetas/receta_683f8d02e218d.jpg" alt="Tarta de jamón y queso">
-    </div>
-    <div class="card-contenido">
-      <h3>Tarta de jamón y queso</h3>
-      <hr>
-      <p>Una tarta clásica, fácil y rápida de hacer, ideal para una merienda o cena liviana.</p>
-    </div>
+  <button class="arrow left" onclick="scrollCarousel(-1)">&#x276E;</button>
+  <div class="card-container" id="carouselContainer">
+    <?php foreach ($recetas as $receta): ?>
+      <a href="receta.php?id=<?= $receta['id'] ?>" class="card-link">
+        <div class="card-receta">
+          <div class="card-img">
+            <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>">
+          </div>
+          <div class="card-contenido">
+            <h3><?= htmlspecialchars($receta['titulo']) ?></h3>
+            <hr>
+            <p><?= htmlspecialchars($receta['descripcion']) ?></p>
+          </div>
+        </div>
+      </a>
+    <?php endforeach; ?>
   </div>
-</a>
-
-<!-- Tarta de manzana -->
-<a href="receta.php" class="card-link">
-  <div class="card-receta card-destacada">
-    <div class="card-img">
-      <img src="../Img/imgrecetas/receta_683fa1d0039bd.jpg" alt="Tarta de manzana">
-    </div>
-    <div class="card-contenido">
-      <h3>Tarta de manzana</h3>
-      <hr>
-      <p>Una delicia dulce con manzanas caramelizadas. Perfecta para la tarde o como postre.</p>
-    </div>
-  </div>
-</a>
-
-<!-- Panqueques salados rellenos -->
-<a href="receta.php" class="card-link">
-  <div class="card-receta">
-    <div class="card-img">
-      <img src="../Img/imgrecetas/receta_683fad864be9b.jpg" alt="Panqueques salados">
-    </div>
-    <div class="card-contenido">
-      <h3>Panqueques salados rellenos</h3>
-      <hr>
-      <p>Una opción versátil y sabrosa. Rellenos con lo que quieras, siempre quedan bien.</p>
-    </div>
-  </div>
-</a>
+  <button class="arrow right" onclick="scrollCarousel(1)">&#x276F;</button>
 </div>
 
-      <button class="arrow right">&#x276F;</button>
-    </div>
   </main>
 </body>
 </html>

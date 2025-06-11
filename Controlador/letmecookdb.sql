@@ -3,12 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2025 a las 05:44:00
+-- Tiempo de generación: 11-06-2025 a las 06:46:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
+USE s953_letmecookdb;
 SET time_zone = "+00:00";
 
 
@@ -26,6 +27,8 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `favoritos`
 --
+
+
 
 CREATE TABLE `favoritos` (
   `usuario_id` int(11) NOT NULL,
@@ -67,7 +70,15 @@ INSERT INTO `ingredientes` (`id`, `nombre`, `medicion_id`) VALUES
 (16, 'Jamón cocido', 1),
 (17, 'Queso', 1),
 (18, 'Crema de leche', 3),
-(19, 'Pimienta', 6);
+(19, 'Pimienta', 6),
+(21, 'Masa para pizza', 7),
+(22, 'Puré de tomate', 3),
+(23, 'Papas', 7),
+(24, 'Pan rallado', 1),
+(25, 'Arroz', 1),
+(26, 'Canela', 6),
+(27, 'Carne picada', NULL),
+(28, 'Salsa de tomate', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,44 +123,49 @@ CREATE TABLE `pasos` (
 --
 
 INSERT INTO `pasos` (`id`, `receta_id`, `numero_paso`, `descripcion`) VALUES
-(1, 1, 1, 'Pelar y cortar las manzanas.'),
-(2, 1, 2, 'Preparar la masa mezclando harina, manteca y huevos.'),
-(3, 1, 3, 'Colocar la masa en el molde y agregar manzanas.'),
-(4, 1, 4, 'Espolvorear azúcar por encima.'),
-(5, 1, 5, 'Hornear por 40 minutos.'),
-(6, 2, 1, 'Precalentar el horno a 180°C.\\r\\n\\r\\n'),
-(7, 2, 2, 'Estirar la masa en un molde para tartas.\\r\\n\\r\\n'),
-(8, 2, 3, 'Colocar el jamón y el queso sobre la masa.\\r\\n\\r\\n'),
-(9, 2, 4, 'Batir los huevos con la crema y salpimentar.\\r\\n\\r\\n'),
-(10, 2, 5, 'Verter la mezcla sobre el jamón y queso.\\r\\n\\r\\n'),
-(11, 2, 6, 'Hornear durante 30 minutos o hasta que esté dorada.\\r\\n\\r\\n'),
-(12, 2, 7, 'Dejar enfriar unos minutos antes de servir.\\r\\n\\r\\n'),
-(13, 3, 1, 'Precalentar el horno a 180°C'),
-(14, 3, 2, 'Estirar la masa en un molde para tartas.\\r\\n\\r\\n'),
-(15, 3, 3, 'Cortar el queso y el jamón en trozos pequeños'),
-(16, 3, 4, 'Colocar el jamón y el queso sobre la masa.\\r\\n\\r\\n'),
-(17, 3, 5, 'Batir los huevos con la crema y salpimentar.\\r\\n\\r\\n'),
-(18, 3, 6, 'Verter la mezcla sobre el jamón y queso.\\r\\n\\r\\n'),
-(19, 3, 7, 'Hornear durante 30 minutos o hasta que esté dorada.\\r\\n\\r\\n'),
-(20, 3, 8, 'Dejar enfriar unos minutos antes de servir.\\r\\n\\r\\n'),
-(21, 4, 1, 'En un bowl, mezclá la harina, los huevos, la leche y la sal hasta que no haya grumos.\\r\\n\\r\\n'),
-(22, 4, 2, 'Si querés, agregá una cucharada de manteca derretida para que queden más suaves.\\r\\n\\r\\n'),
-(23, 4, 3, 'En una sartén caliente con un poco de aceite, cociná los panqueques uno por uno (poné un poco de mezcla, girá para que cubra toda la sartén, cociná hasta que los bordes se despeguen y das vuelta).\\r\\n\\r\\n'),
-(24, 4, 4, 'Mientras hacés los panqueques, salteá la cebolla picada en aceite hasta que quede dorada.\\r\\n\\r\\n'),
-(25, 4, 5, 'Para armar: rellená cada panqueque con cebolla salteada y queso, enrollalo o doblalo en forma de triángulo.\\r\\n\\r\\n'),
-(26, 4, 6, 'Podés gratinarlos unos minutos al horno o microondas si querés que el queso se derrita bien.\\r\\n\\r\\n'),
-(27, 5, 1, 'En un bowl, mezclá la harina, los huevos, la leche y la sal hasta que no haya grumos.\\r\\n\\r\\n'),
-(28, 5, 2, 'Si querés, agregá una cucharada de manteca derretida para que queden más suaves.\\r\\n\\r\\n'),
-(29, 5, 3, 'En una sartén caliente con un poco de aceite, cociná los panqueques uno por uno (poné un poco de mezcla, girá para que cubra toda la sartén, cociná hasta que los bordes se despeguen y das vuelta).\\r\\n\\r\\n'),
-(30, 5, 4, 'Mientras hacés los panqueques, salteá la cebolla picada en aceite hasta que quede dorada.\\r\\n\\r\\n'),
-(31, 5, 5, 'Para armar: rellená cada panqueque con cebolla salteada y queso, enrollalo o doblalo en forma de triángulo.\\r\\n\\r\\n'),
-(32, 5, 6, 'Podés gratinarlos unos minutos al horno o microondas si querés que el queso se derrita bien.\\r\\n\\r\\n'),
-(33, 6, 1, 'En un bowl, mezclá la harina, los huevos, la leche y la sal hasta que no haya grumos.\\r\\n\\r\\n'),
-(34, 6, 2, 'Si querés, agregá una cucharada de manteca derretida para que queden más suaves.\\r\\n\\r\\n'),
-(35, 6, 3, 'En una sartén caliente con un poco de aceite, cociná los panqueques uno por uno (poné un poco de mezcla, girá para que cubra toda la sartén, cociná hasta que los bordes se despeguen y das vuelta).\\r\\n\\r\\n'),
-(36, 6, 4, 'Mientras hacés los panqueques, salteá la cebolla picada en aceite hasta que quede dorada.\\r\\n\\r\\n'),
-(37, 6, 5, 'Para armar: rellená cada panqueque con cebolla salteada y queso, enrollalo o doblalo en forma de triángulo.\\r\\n\\r\\n'),
-(38, 6, 6, 'Podés gratinarlos unos minutos al horno o microondas si querés que el queso se derrita bien.\\r\\n\\r\\n');
+(53, 6, 1, 'Precalentar el horno a 180°C.'),
+(54, 6, 2, 'Pelar y cortar las manzanas en rodajas finas.'),
+(55, 6, 3, 'Mezclar las manzanas con azúcar y canela.'),
+(56, 6, 4, 'Preparar la masa con harina, huevos, leche y manteca derretida.'),
+(57, 6, 5, 'Colocar las manzanas sobre la masa en un molde.'),
+(58, 6, 6, 'Hornear durante 40 a 50 minutos hasta dorar.'),
+(68, 19, 1, 'Precalentar el horno a 200°C.'),
+(69, 19, 2, 'Estirar la masa sobre una bandeja enharinada.'),
+(70, 19, 3, 'Cubrir con puré de tomate y esparcir sal, orégano y pimienta.'),
+(71, 19, 4, 'Agregar el queso rallado por encima.'),
+(72, 19, 5, 'Hornear durante 20 a 30 minutos hasta que el queso se derrita y la masa esté dorada.'),
+(73, 19, 1, 'Precalentar el horno a 200°C.'),
+(76, 19, 2, 'Estirar la masa sobre una bandeja enharinada.'),
+(79, 19, 3, 'Cubrir con puré de tomate y esparcir sal, orégano y pimienta.'),
+(82, 19, 4, 'Agregar el queso rallado por encima.'),
+(85, 19, 5, 'Hornear durante 20 a 30 minutos hasta que el queso se derrita y la masa esté dorada.'),
+(93, 34, 1, 'Hervir los fideos en agua con sal hasta que estén al dente.'),
+(94, 34, 2, 'En una sartén, calentar el aceite y dorar la cebolla picada y el ajo.'),
+(95, 34, 3, 'Agregar la carne picada y cocinar hasta que se dore.'),
+(96, 34, 4, 'Incorporar el puré de tomate y condimentar. Cocinar a fuego medio por 15 minutos.'),
+(97, 34, 5, 'Servir los fideos con la salsa y espolvorear queso rallado si se desea.'),
+(98, 35, 1, 'Precalentar el horno a 200°C.'),
+(99, 35, 2, 'Estirar la masa en una bandeja enharinada.'),
+(100, 35, 3, 'Cubrir con puré de tomate, sal y orégano.'),
+(101, 35, 4, 'Añadir la mozzarella en trozos.'),
+(102, 35, 5, 'Hornear 20-25 minutos.'),
+(103, 35, 6, 'Agregar hojas de albahaca fresca al salir del horno.\\r\\n\\r\\n'),
+(104, 36, 1, 'Batir los huevos y salpimentar.'),
+(105, 36, 2, 'Pasar los bifes por huevo y luego pan rallado.'),
+(106, 36, 3, 'Freír en aceite caliente hasta dorar.\\r\\n\\r\\n'),
+(107, 36, 4, 'Colocar en bandeja, cubrir con salsa, jamón y queso.'),
+(108, 36, 5, 'Gratinar al horno por 10 minutos.'),
+(109, 37, 1, 'Picar el jamón y el queso.'),
+(110, 37, 2, 'Mezclar con orégano.'),
+(111, 37, 3, 'Rellenar las tapas y cerrar con repulgue.'),
+(112, 37, 4, 'Pincelar con huevo batido.'),
+(113, 37, 5, 'Hornear a 200°C por 20-25 minutos.'),
+(114, 38, 1, 'Romper el pan en trozos y remojar con leche.'),
+(115, 38, 2, 'Batir los huevos con el azúcar y la vainilla.'),
+(116, 38, 3, 'Mezclar todo y agregar pasas de uva si se quiere.'),
+(117, 38, 4, 'Volcar en molde acaramelado.'),
+(118, 38, 5, 'Hornear a baño María a 180°C por 50 minutos.'),
+(119, 38, 6, 'Dejar enfriar, desmoldar y servir.\\r\\n\\r\\n');
 
 -- --------------------------------------------------------
 
@@ -185,12 +201,13 @@ CREATE TABLE `recetas` (
 --
 
 INSERT INTO `recetas` (`id`, `titulo`, `imagen`, `descripcion`, `tiempo_preparacion`, `dificultad`, `usuario_id`, `fecha_creacion`) VALUES
-(1, 'Tarta de Manzana', 'tarta_manzana.jpg', 'Una tarta clásica con manzanas y masa casera.', 60, 'Media', 11, '2025-06-03 20:25:40'),
-(2, 'Tarta de Jamón y Queso', 'receta_683f8d02e218d.jpg', 'Una tarta clásica, fácil y rápida de hacer, ideal para una merienda o cena liviana.', 40, 'Fácil', 11, '2025-06-03 21:02:10'),
-(3, 'Tarta de Jamón y Queso', 'receta_683f8dce6c0a4.jpg', 'Una tarta clásica, fácil y rápida de hacer, ideal para una merienda o cena liviana.', 40, 'Fácil', 11, '2025-06-03 21:05:34'),
-(4, 'Panqueques Salados Rellenos', 'receta_683fa1d0039bd.jpg', 'Una base de panqueque clásico, relleno con queso y cebolla salteada. Ideal para un almuerzo o cena rápida.\\r\\n\\r\\n', 80, '', 11, '2025-06-03 22:30:56'),
-(5, 'Panqueques Salados Rellenos', 'receta_683fa2c2035a8.jpg', 'Una base de panqueque clásico, relleno con queso y cebolla salteada. Ideal para un almuerzo o cena rápida.\\r\\n\\r\\n', 80, NULL, 11, '2025-06-03 22:34:58'),
-(6, 'Panqueques Salados Rellenos', 'receta_683fad864be9b.jpg', 'Una base de panqueque clásico, relleno con queso y cebolla salteada. Ideal para un almuerzo o cena rápida.\\r\\n\\r\\n', 80, NULL, 11, '2025-06-03 23:20:54');
+(6, 'Tarta de Manzana', 'receta_tarta_manzana.jpg', 'Clásica tarta dulce con relleno de manzanas y un toque de canela.', 50, 'Media', 11, '2025-06-10 22:52:47'),
+(19, 'Pizza Casera', 'pizza_casera.jpg', 'Pizza al horno con salsa de tomate y queso derretido.', 60, 'Media', 11, '2025-06-10 23:14:33'),
+(34, 'Fideos con tuco', 'receta_68490301eb573.jpg', 'Fideos al dente con una salsa tuco casera a base de tomate, cebolla y carne picada.', 45, NULL, 11, '2025-06-11 01:16:01'),
+(35, 'Pizza Margarita', 'receta_684903dc35190.jpg', 'Pizza clásica con salsa de tomate, queso y albahaca.', 60, NULL, 11, '2025-06-11 01:19:40'),
+(36, 'Milanesa Napolitana', 'receta_6849048220f5e.jpg', 'Clásica milanesa con salsa, jamón y queso gratinado.', 60, NULL, 11, '2025-06-11 01:22:26'),
+(37, 'Empanadas de Jamón y Queso', 'receta_684904f6bc440.jpg', 'Empanadas rápidas con relleno derretido y sabroso.', 40, NULL, 11, '2025-06-11 01:24:22'),
+(38, 'Budín de pan', 'receta_68490581ec7be.jpg', 'Postre económico con pan duro, leche y azúcar.', 70, NULL, 11, '2025-06-11 01:26:41');
 
 -- --------------------------------------------------------
 
@@ -210,26 +227,42 @@ CREATE TABLE `receta_ingrediente` (
 --
 
 INSERT INTO `receta_ingrediente` (`receta_id`, `ingrediente_id`, `cantidad`, `unidad`) VALUES
-(1, 1, 4.00, 'unidades'),
-(1, 2, 150.00, 'gramos'),
-(1, 3, 250.00, 'gramos'),
-(1, 4, 100.00, 'gramos'),
-(1, 5, 2.00, 'unidades'),
-(3, 1, 300.00, 'gramos'),
-(3, 3, 5.00, 'gramos'),
-(3, 5, 3.00, 'unidades'),
-(3, 16, 150.00, 'gramos'),
-(3, 17, 150.00, 'gramos'),
-(3, 18, 200.00, 'mililitros'),
-(3, 19, 1.00, 'cucharadas'),
-(6, 1, 120.00, 'gramos'),
-(6, 3, 5.00, 'gramos'),
+(6, 1, 200.00, 'gramos'),
+(6, 2, 100.00, 'gramos'),
 (6, 5, 2.00, 'unidades'),
-(6, 6, 250.00, 'mililitros'),
-(6, 7, 1.00, 'cucharadas'),
-(6, 8, 40.00, 'gramos'),
-(6, 11, 1.00, 'unidades'),
-(6, 17, 100.00, 'gramos');
+(6, 6, 100.00, 'mililitros'),
+(6, 8, 50.00, 'gramos'),
+(19, 3, 5.00, 'gramos'),
+(19, 14, 150.00, 'gramos'),
+(19, 19, 1.00, 'gramo'),
+(19, 21, 1.00, 'unidad'),
+(19, 22, 100.00, 'gramos'),
+(34, 3, 5.00, 'gramos'),
+(34, 11, 1.00, 'unidades'),
+(34, 12, 1.00, 'unidades'),
+(34, 14, 35.00, 'gramos'),
+(34, 19, 1.00, 'cucharadas'),
+(34, 22, 250.00, ''),
+(34, 27, 150.00, ''),
+(35, 17, 200.00, 'gramos'),
+(35, 21, 1.00, ''),
+(35, 22, 150.00, ''),
+(36, 3, 5.00, 'gramos'),
+(36, 5, 2.00, 'unidades'),
+(36, 7, 2.00, 'cucharadas'),
+(36, 16, 50.00, 'gramos'),
+(36, 17, 100.00, 'gramos'),
+(36, 19, 1.00, 'cucharadas'),
+(36, 24, 100.00, ''),
+(36, 28, 100.00, ''),
+(37, 5, 1.00, 'unidades'),
+(37, 16, 150.00, 'gramos'),
+(37, 17, 150.00, 'gramos'),
+(38, 2, 150.00, 'gramos'),
+(38, 5, 3.00, 'unidades'),
+(38, 6, 500.00, 'mililitros'),
+(38, 18, 20.00, 'mililitros'),
+(38, 26, 1.00, '');
 
 -- --------------------------------------------------------
 
@@ -241,13 +274,6 @@ CREATE TABLE `receta_tag` (
   `receta_id` int(11) NOT NULL,
   `tag_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `receta_tag`
---
-
-INSERT INTO `receta_tag` (`receta_id`, `tag_id`) VALUES
-(1, 8);
 
 -- --------------------------------------------------------
 
@@ -302,7 +328,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `username`, `email`, `password`, `fecha_creacion`, `rol`, `is_admin`) VALUES
-(11, 'Pedro Coppola', 'pedroicoppola@gmail.com', '$2y$10$oHUHvb9VDqo6sU6zxQfT2e2par42Df51AvOmYK08/aWB86L0gwU2m', '2025-06-03 19:39:02', 'usuario', 0);
+(11, 'Pedro Coppola', 'pedroicoppola@gmail.com', '$2y$10$oHUHvb9VDqo6sU6zxQfT2e2par42Df51AvOmYK08/aWB86L0gwU2m', '2025-06-03 19:39:02', 'usuario', 0),
+(12, 'Pedrous', 'asd@gmail.com', '$2y$10$fqSF2Y0WCTn9AylG6L368uBcZK7L6xbTA8gR9Mznhbpdr3gRQBP4a', '2025-06-10 22:01:16', 'usuario', 0);
 
 --
 -- Índices para tablas volcadas
@@ -387,7 +414,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `mediciones`
@@ -399,13 +426,13 @@ ALTER TABLE `mediciones`
 -- AUTO_INCREMENT de la tabla `pasos`
 --
 ALTER TABLE `pasos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `tags`
@@ -417,7 +444,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
