@@ -34,6 +34,7 @@ if (isset($_GET['logout'])) {
     </div>
 
     <?php if (isset($_SESSION["usuario"])): ?>
+      
       <div class="user-info">
         <span class="username"><?php echo htmlspecialchars($_SESSION["usuario"]); ?></span>
         <img src="../Img/pfp.jpg" alt="Foto de perfil" class="user-pic">
