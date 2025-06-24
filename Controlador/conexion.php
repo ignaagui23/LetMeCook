@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$usuario = "root"; // o el usuario de tu servidor MySQL
-$contrasena = ""; // o la contraseña si tiene
-$baseDeDatos = "letmecookdb";
+$host = "45.235.98.222:3306";
+$usuario = "u953_r5rqbHLUKg";
+$contrasena = "+eYL!XnE=XrRHivLr7LZxcc9";
+$baseDeDatos = "s953_letmecookdb";
 
 $conn = new mysqli($host, $usuario, $contrasena, $baseDeDatos);
 
@@ -10,3 +10,4 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 ?>
+

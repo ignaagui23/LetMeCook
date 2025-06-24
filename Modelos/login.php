@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         }
 
-        $sql = "SELECT * FROM Usuarios WHERE username = ?";
+        $sql = "SELECT * FROM usuarios WHERE username = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Verificar duplicados
-        $check_sql = "SELECT * FROM Usuarios WHERE username = ? OR email = ?";
+        $check_sql = "SELECT * FROM usuarios WHERE username = ? OR email = ?";
         $check_stmt = $conn->prepare($check_sql);
         $check_stmt->bind_param("ss", $new_username, $new_email);
         $check_stmt->execute();
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO Usuarios (username, email, password, is_admin) VALUES (?, ?, ?, 0)";
+        $sql = "INSERT INTO usuarios (username, email, password, is_admin) VALUES (?, ?, ?, 0)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $new_username, $new_email, $hashed_password);
 

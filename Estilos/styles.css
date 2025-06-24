@@ -13,8 +13,7 @@ body {
   background-size: 20vw;
   color: #1a1a1a;
   position: relative;
-  z-index: 0; 
-
+  z-index: 0;   
 }
 
 /* Capa blanca encima del fondo para aclararlo */

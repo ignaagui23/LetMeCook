@@ -1,0 +1,109 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.contenedor-receta {
+  width: 90%;
+  max-width: 1000px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 3px solid #d4847f;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 2rem;
+  align-self: center;
+}
+
+main {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+}
+
+.receta-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.receta-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.imagen-receta {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid #c6382e;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.receta-info {
+  flex: 1;
+}
+
+.receta-info h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.receta-info p {
+  margin: 0.3rem 0;
+}
+
+.descripcion {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.estrella-btn {
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: gold;
+  cursor: pointer;
+}
+
+.receta-detalle {
+  margin-top: 2rem;
+}
+
+.receta-detalle h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #c6382e;
+  padding-bottom: 0.3rem;
+}
+
+.receta-detalle ul,
+.receta-detalle ol {
+  margin-left: 1.5rem;
+}
+
+.valoracion-form {
+  margin-top: 2rem;
+}
+
+.valoracion-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.estrellas label {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+select {
+  padding: 5px;
+  font-size: 14px;
+}
