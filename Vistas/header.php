@@ -3,7 +3,7 @@
 if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");
-  exit();
+  exit(); 
 }
 ?>
 
@@ -69,7 +69,17 @@ if (isset($_GET['logout'])) {
   Recetas
 </button>
 
-        <button>Opción 3</button>
+<?php if (isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1): ?>
+  <button onclick="window.location.href='admin-dashboard.php'" class="btn-agregar-receta">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 3h18v18H3z"/>
+      <path d="M9 9h6v6H9z"/>
+    </svg>
+    Admin Dashboard
+  </button>
+<?php endif; ?>
+
+
       </div>
 
       <div class="bottom-buttons">
