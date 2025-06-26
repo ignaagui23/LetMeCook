@@ -38,9 +38,17 @@ if (isset($_GET['logout'])) {
         <a href="cuenta.php">
         <span class="username"><?php echo htmlspecialchars($_SESSION["usuario"]); ?></span>
         </a>
-        <img src="../Img/pfp.jpg" alt="Foto de perfil" class="user-pic">
+<?php
+// Ruta por defecto si no hay foto
+$foto = !empty($_SESSION['foto_perfil']) && file_exists("../Img/pfp/" . $_SESSION['foto_perfil'])
+  ? "../Img/pfp/" . $_SESSION['foto_perfil']
+  : "../Img/pfp.jpg";
+?>
+
+<img src="<?php echo htmlspecialchars($foto); ?>" alt="Foto de perfil" class="user-pic">
       </div>
     <?php endif; ?>
+
   </header>
 
   <?php if (isset($_SESSION["usuario"])): ?>
@@ -70,7 +78,7 @@ if (isset($_GET['logout'])) {
 </button>
 
 <?php if (isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1): ?>
-  <button onclick="window.location.href='admin-dashboard.php'" class="btn-agregar-receta">
+  <button onclick="window.location.href='admin_dashboard.php'" class="btn-agregar-receta">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 3h18v18H3z"/>
       <path d="M9 9h6v6H9z"/>

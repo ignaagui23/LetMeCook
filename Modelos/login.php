@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION["usuario"] = $usuario["username"];
                 $_SESSION["es_admin"] = $usuario["is_admin"];
                 $_SESSION["usuario_id"] = $usuario["id"];   
+                $_SESSION["foto_perfil"] = $usuario["foto_perfil"] ?? null; // Guardar foto de perfil si existe
 
                 header("Location: ../Vistas/index.php");
                 exit();
