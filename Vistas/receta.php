@@ -1,7 +1,6 @@
 <?php
 session_start();
 // Las rutas deben ser correctas desde Vistas/
-require_once('../Modelos/recetas.php'); // Asegúrate que esta ruta es correcta
 require_once('../Controlador/conexion.php'); // Asegúrate que esta ruta es correcta
 
 if (!isset($_GET['id'])) {
@@ -68,12 +67,7 @@ if ($usuario_id) {
 // Obtener dificultad del usuario (si existe)
 $dificultad_usuario = '';
 if ($usuario_id) {
-    // La dificultad en la tabla 'recetas' es la dificultad general de la receta.
-    // Si quieres que el usuario pueda valorar la dificultad, necesitarías una columna en 'puntuaciones' para eso,
-    // o un mecanismo diferente. Por ahora, el select mostrará la dificultad de la receta, no la valoración del usuario.
-    // Si la dificultad se envía en el formulario, es una nueva valoración o actualización de la dificultad general.
-    // Si la idea es que el usuario califique la dificultad percibida, el campo de dificultad debería ser parte de la tabla 'puntuaciones'.
-    // Para simplificar, asumiremos que se muestra la dificultad ya establecida en la receta.
+
 }
 
 // Cerrar conexión (opcional, pero buena práctica si no se va a usar más)
@@ -92,94 +86,88 @@ $conn->close();
 <body class="flex-center-body"> <?php include 'header.php'; // Asegúrate que la ruta es correcta ?>
 
   <main>
-    <div class="recipe-card-modern"> <div class="image-section">
-            <div class="hero-image-container-modern">
-                <img alt="<?= htmlspecialchars($receta['titulo']) ?>" class="recipe-image-modern" src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>">
-            </div>
-        </div>
-        <div class="details-section">
-            <h1 class="recipe-title-modern"><?= htmlspecialchars($receta['titulo']) ?></h1>
-            <p class="recipe-description-modern"><?= nl2br(htmlspecialchars($receta['descripcion'])) ?></p>
-
-            <div class="recipe-details-grid">
-                <div class="detail-item">
-                    <span class="material-icons">timer</span>
-                    <span>Tiempo: <?= $receta['tiempo_preparacion'] ?> min</span>
-                </div>
-                <div class="detail-item">
-                    <span class="material-icons">thermostat</span>
-                    <span>Dificultad: <?= $receta['dificultad'] ?? 'No especificada' ?></span>
-                </div>
-                <div class="detail-item">
-                    <span class="material-icons">person</span>
-                    <span>Autor: <?= htmlspecialchars($receta['username']) ?></span>
-                </div>
-                <div class="detail-item rating">
-                    <span class="material-icons">star</span>
-                    <span><?= $promedio ?>/5</span>
-                </div>
-            </div>
-
-            <?php if ($usuario_id): ?>
-                <div class="favorite-section">
-                    <form method="post" action="../Modelos/toggle_favorito.php">
-                        <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
-                        <button type="submit" class="favorite-btn"><?= $esFavorito ? '★ Favorito' : '☆ Añadir a favoritos' ?></button>
-                    </form>
-                </div>
-            <?php endif; ?>
-
-            <div class="ingredients-section">
-                <h2 class="section-title-modern">Ingredientes</h2>
-                <ul class="ingredient-list-modern">
-                    <?php while($ing = $ingredientes->fetch_assoc()): ?>
-                        <li><span class="material-icons">fiber_manual_record</span><?= $ing['cantidad'] . ' ' . $ing['unidad'] . ' de ' . htmlspecialchars($ing['nombre']) ?></li>
-                    <?php endwhile; ?>
-                </ul>
-            </div>
-
-            <div class="steps-section">
-                <h2 class="section-title-modern">Pasos</h2>
-                <ol class="steps-list-modern">
-                    <?php while($paso = $pasos->fetch_assoc()): ?>
-                        <li>
-                            <span class="step-number"><?= htmlspecialchars($paso['numero_paso']) ?>.</span>
-                            <span><?= htmlspecialchars($paso['descripcion']) ?></span>
-                        </li>
-                    <?php endwhile; ?>
-                </ol>
-            </div>
-
-            <?php if ($usuario_id): ?>
-                <div class="rating-form-modern">
-                    <h2 class="section-title-modern">Valorar receta</h2>
-                    <form method="post" action="../Modelos/valorar.php">
-                        <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
-
-                        <label for="puntuacion" class="form-label">Tu valoración (1 a 5):</label>
-                        <div class="stars-selection">
-                            <?php for ($i = 1; $i <= 5; $i++): ?>
-                                <label>
-                                    <input type="radio" name="puntuacion" value="<?= $i ?>" <?= ($i == $puntuacion_usuario) ? 'checked' : '' ?>>
-                                    <span class="material-icons star-icon"><?= ($i <= $puntuacion_usuario) ? 'star' : 'star_border' ?></span>
-                                </label>
-                            <?php endfor; ?>
-                        </div>
-
-                        <label for="dificultad" class="form-label">Dificultad:</label>
-                        <select name="dificultad" class="form-select">
-                            <option value="">Seleccionar</option>
-                            <option value="Fácil" <?= ($receta['dificultad'] == 'Fácil') ? 'selected' : '' ?>>Fácil</option>
-                            <option value="Media" <?= ($receta['dificultad'] == 'Media') ? 'selected' : '' ?>>Media</option>
-                            <option value="Difícil" <?= ($receta['dificultad'] == 'Difícil') ? 'selected' : '' ?>>Difícil</option>
-                        </select>
-
-                        <button type="submit" class="submit-btn">Enviar valoración</button>
-                    </form>
-                </div>
-            <?php endif; ?>
-        </div>
+  <div class="receta-layout">
+<div class="receta-top">
+    <!-- Imagen -->
+    <div class="receta-imagen">
+      <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>">
     </div>
+
+    <!-- Información general -->
+    <div class="receta-info">
+      <h1><?= htmlspecialchars($receta['titulo']) ?></h1>
+      <hr>
+      <p class="descripcion"><?= nl2br(htmlspecialchars($receta['descripcion'])) ?></p>
+
+      <div class="info-clave">
+        <span><i class="material-icons">timer</i> <?= $receta['tiempo_preparacion'] ?> min</span>
+        <span><i class="material-icons">thermostat</i> <?= $receta['dificultad'] ?? 'No especificada' ?></span>
+        <span><i class="material-icons">person</i> <?= htmlspecialchars($receta['username']) ?></span>
+        <span><i class="material-icons">star</i> <?= $promedio ?>/5</span>
+      </div>
+
+      <?php if ($usuario_id): ?>
+        <form method="post" action="../Modelos/toggle_favorito.php">
+          <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
+          <button type="submit" class="favorite-btn"><?= $esFavorito ? '★ Favorito' : '☆ Añadir a favoritos' ?></button>
+        </form>
+      <?php endif; ?>
+
+    </div>
+    <!-- Fin de la información general -->
+  </div>
+    <!-- Tarjetas punteadas verticales -->
+    <div class="receta-secciones">
+      <div class="tarjeta-receta">
+        <h2>Ingredientes</h2>
+        <hr>
+          <?php while($ing = $ingredientes->fetch_assoc()): ?>
+            <p><b> • </b><?= $ing['cantidad'] . ' ' . $ing['unidad'] . ' de ' . htmlspecialchars($ing['nombre']) ?></p>
+          <?php endwhile; ?>
+      </div>
+
+      <div class="tarjeta-receta">
+        <h2>Pasos</h2>
+        <hr>
+        <ol>
+          <?php while($paso = $pasos->fetch_assoc()): ?>
+            <li><?= htmlspecialchars($paso['descripcion']) ?></li>
+          <?php endwhile; ?>
+        </ol>
+      </div>
+    </div>
+
+    <?php if ($usuario_id): ?>
+      <div class="rating-form-modern">
+        <h2>Valorar receta</h2>
+        <form method="post" action="../Modelos/valorar.php">
+          <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
+
+          <label>Tu valoración (1 a 5):</label>
+          <div class="stars-selection">
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+              <label>
+                <input type="radio" name="puntuacion" value="<?= $i ?>" <?= ($i == $puntuacion_usuario) ? 'checked' : '' ?>>
+                <span class="material-icons star-icon"><?= ($i <= $puntuacion_usuario) ? 'star' : 'star_border' ?></span>
+              </label>
+            <?php endfor; ?>
+          </div>
+
+          <label>Dificultad:</label>
+          <select name="dificultad">
+            <option value="">Seleccionar</option>
+            <option value="Fácil" <?= ($receta['dificultad'] == 'Fácil') ? 'selected' : '' ?>>Fácil</option>
+            <option value="Media" <?= ($receta['dificultad'] == 'Media') ? 'selected' : '' ?>>Media</option>
+            <option value="Difícil" <?= ($receta['dificultad'] == 'Difícil') ? 'selected' : '' ?>>Difícil</option>
+          </select>
+
+          <button type="submit">Enviar valoración</button>
+        </form>
+      </div>
+    <?php endif; ?>
+  </div>
+</main>
+
   </main>
 
 

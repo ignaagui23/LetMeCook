@@ -99,4 +99,7 @@ for ($i = 0; $i < count($ingredientes_ids); $i++) {
 
 $stmt_unidad->close();
 
-echo "Receta creada con éxito. <a href='../Vistas/crear_receta.php'>Crear otra</a>";
+    header("Location: ../vistas/crear_receta.php?mensaje=Receta creada correctamente");
+    exit();
+
+

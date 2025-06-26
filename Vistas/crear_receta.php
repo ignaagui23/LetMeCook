@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['usuario_id'] = 11; 
 if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
     exit();
@@ -109,9 +108,17 @@ function agregarIngrediente() {
 </head>
 <body>
     <?php include 'header.php'; ?>
+
+
 <main>
     <h2>Crear una nueva receta</h2>
+    <?php if (isset($_GET['mensaje'])): ?>
+    <div class="alerta exito"><?php echo htmlspecialchars($_GET['mensaje']); ?></div>
+<?php endif; ?>
 
+<?php if (isset($_GET['error'])): ?>
+    <div class="alerta error"><?php echo htmlspecialchars($_GET['error']); ?></div>
+<?php endif; ?>
     <form action="../Modelos/crear_receta.php" method="post" enctype="multipart/form-data" class="contenedor-horizontal">
 
         <section class="formulario" class="datos-principales">

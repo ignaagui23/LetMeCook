@@ -1,394 +1,188 @@
-/* ../Estilos/style_receta_moderna.css */
-
-/* Variables CSS para colores (consistentes con gris oscuro y naranja) */
-:root {
-    --light-background: #fdfaf5; /* Blanco crema para el fondo principal */
-    --text-color: #333333; /* Texto oscuro para contrastar con el fondo claro */
-    --red-accent-color: #e53935; /* Rojo vibrante para acentos y highlights */
-    --card-background: #ffffff; /* Blanco puro para las tarjetas/contenedores */
-    --border-color: #e0e0e0; /* Gris claro para bordes sutiles */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra más suave */
-    --section-border-color: #f8d0d0; /* Rojo muy claro para bordes de sección */
-    --icon-color: var(--red-accent-color); /* Rojo para iconos */
-    --star-filled-color: #fdd835; /* Amarillo para estrellas llenas (menos intenso que gold) */
-    --star-empty-color: #bdbdbd; /* Gris claro para estrellas vacías */
-    --input-bg: #f5f5f5; /* Fondo claro para inputs */
-    --input-border: #cccccc; /* Borde gris para inputs */
-    --button-bg: #e53935; /* Rojo para el fondo de botón */
-    --button-text: #ffffff; /* Texto blanco para el botón */
-    --button-border: #d32f2f; /* Rojo más oscuro para el borde del botón */
-}
-
-/* Base body styles */
-body {
-    font-family: 'Poppins', sans-serif; /* Usamos Poppins como en tu estático */
-    background-color: var(--dark-background);
-    color: var(--light-text-color);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Centrar el contenido principal en la página */
-.flex-center-body {
-    display: flex;
+.receta-layout {
+  padding: 2rem 1rem; /* Menos padding a los costados */
+  width: 70%;
+  margin: auto;
+  background-color: #f7f3f1;
     flex-direction: column;
-    min-height: 100vh;
+    align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+
 }
 
-.flex-center-body main {
-    flex-grow: 1;
+.receta-top {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 2rem; /* Añadir padding para que no se pegue a los bordes */
+    gap: 1.5rem;
+    flex-wrap: wrap;
+        justify-content: space-evenly;
+
 }
 
-/* Recipe Card Container (nuevo) */
-.recipe-card-modern {
-    background-color: var(--card-background);
-    border-radius: 16px;
-    box-shadow: 0 10px 15px var(--shadow-color);
-    overflow: hidden; /* Para que los bordes redondeados se apliquen correctamente */
-    display: grid;
-    grid-template-columns: 1fr; /* Por defecto, una columna */
-    max-width: 1000px; /* Ancho máximo similar al original */
-    width: 100%; /* Ocupa el ancho disponible */
-    margin: 0 auto; /* Centrar la tarjeta */
-    border: 2px solid var(--border-color); /* Borde sutil */
+
+.receta-imagen img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 1rem;
+  border: 1.7px #8a8a8a;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 5%;
 }
 
-/* Image Section */
-.image-section {
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff; /* Fondo para la sección de imagen */
+.receta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 50%;
+  justify-content: center;
+  text-align: center;
 }
 
-.hero-image-container-modern {
-    border: 4px solid var(--border-color); /* Borde alrededor de la imagen */
-    border-radius: 12px;
-    box-shadow: 0 4px 6px var(--shadow-color);
-    overflow: hidden; /* Asegura que el borde redondeado funcione con la imagen */
+.receta-info h1 {
+  color: #c6382e;
+  margin-bottom: 0;
 }
 
-.recipe-image-modern {
-    width: 350px;
-    height: auto;
-    display: block; /* Eliminar espacio extra debajo de la imagen */
-    object-fit: cover;
-    border-radius: 8px; /* Bordes redondeados para la imagen interna */
+.receta-info hr {
+  border: none;
+  border-top: 1px solid #d4847f;
+  width: 100%;
 }
 
-/* Details Section */
-.details-section {
-    padding: 2rem;
-    color: var(--light-text-color);
+.receta-info .descripcion {
+  color: #444;
+  font-size: 1rem;
+  font-style: italic;
 }
 
-.recipe-title-modern {
-    font-size: 2.5rem; /* Más grande */
-    font-weight: 700;
-    color: var(--accent-color); /* Naranja */
-    margin-bottom: 0.8rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+.info-clave {
+    display: grid; /* Cambiamos a grid */
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual ancho */
+    grid-template-rows: repeat(2, auto); /* Dos filas, altura automática */
+    gap: 40px; /* Espacio entre los elementos del grid */
+    width: 100%;
+    color: #333;
+    align-items: center; /* Centra verticalmente los elementos en sus celdas */
+    justify-items: start; /* Alinea los elementos a la izquierda en sus celdas */
+    margin-top: 5.2rem; /* Agrega espacio arriba para separarlo de receta-info */
 }
 
-.recipe-description-modern {
-    color: #000000; /* Gris más claro para la descripción */
-    font-style: italic;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+.info-clave span {
+    display: flex; /* Para alinear el icono y el texto */
+    align-items: center; /* Centra verticalmente el icono con el texto */
 }
 
-/* Details Grid (Tiempo, Dificultad, Autor, Valoración) */
-.recipe-details-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Una columna por defecto */
-    gap: 0.8rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px dashed var(--border-color);
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    color: var(--light-text-color);
-    font-size: 0.95rem;
-}
-
-.detail-item .material-icons {
-    color: var(--icon-color); /* Naranja para los iconos */
-    margin-right: 0.6rem;
-    font-size: 1.3rem; /* Tamaño de icono */
-}
-
-.detail-item.rating .material-icons {
-    color: var(--star-filled-color); /* Estrellas doradas */
-}
-
-/* Favorite button */
-.favorite-section {
-    margin-bottom: 2rem;
-    text-align: center; /* Centrar el botón de favorito */
+.info-clave i {
+    color: #DA443F;
+    margin-right: 0.5rem; /* Un poco más de espacio entre el icono y el texto */
 }
 
 .favorite-btn {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    padding: 10px 20px;
-    border: 2px solid var(--button-border);
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    display: inline-flex; /* Para alinear el icono y el texto */
-    align-items: center;
-    gap: 5px;
+  background-color: #DA443F;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.7rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .favorite-btn:hover {
-    background-color: var(--accent-color);
-    color: var(--dark-background);
-    border-color: var(--accent-color);
+  background-color: #c6382e;
+}
+.receta-secciones {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/* Section Titles (Ingredientes, Pasos, Valorar) */
-.section-title-modern {
-    font-weight: 700;
-    font-size: 1.8rem; /* Tamaño más grande que antes */
-    color: red;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 2px solid var(--section-border-color); /* Borde inferior */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+.tarjeta-receta {
+    border: 3px dashed #DA443F;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 300px;
 }
 
-/* Lists (Ingredientes y Pasos) */
-.ingredient-list-modern,
-.steps-list-modern {
-    list-style: none; /* Eliminar bullets por defecto */
-    padding: 0;
-    margin-left: 0;
-    list-style-position: inside; /* Si se usara un estilo de lista */
+.tarjeta-receta h2 {
+    color: #c6382e;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
-.ingredient-list-modern li,
-.steps-list-modern li {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 0.9rem;
-    color: #000000; /* Texto ligeramente más claro */
-    font-size: 0.95rem;
+.tarjeta-receta hr {
+    border: 1px solid #eb6e6a;
+    margin: 1.5rem 0;
 }
 
-.ingredient-list-modern .material-icons {
-    color: var(--icon-color); /* Naranja */
-    margin-right: 0.75rem;
-    margin-top: 0.25rem;
-    font-size: 0.8em; /* Tamaño de bullet */
+.tarjeta-receta ul p,
+.tarjeta-receta ol p, 
+.tarjeta-receta ol li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    line-height: 1.4;
 }
 
-.steps-list-modern li .step-number {
-    color: var(--accent-color); /* Naranja para el número del paso */
-    font-weight: 600;
-    margin-right: 0.5rem;
-    flex-shrink: 0; /* Evitar que el número se encoja */
+/* Poner el número junto al texto del <li> */
+.tarjeta-receta ol {
+    list-style-position: inside;
 }
 
-/* Rating Form */
+li::marker {
+    color: #c6382e;
+    font-weight: bold;
+}
+
+.tarjeta-receta p b {
+    color: #c6382e;
+    margin: 3%;
+}
+
+.tarjeta-receta p {
+    line-height: 30px;
+}
+
 .rating-form-modern {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px dashed var(--border-color);
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 2px solid #c6382e;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.form-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: var(--light-text-color);
+.rating-form-modern h2 {
+  color: #c6382e;
+  margin-bottom: 1rem;
 }
 
-.stars-selection {
-    margin-bottom: 20px;
+.rating-form-modern .stars-selection label {
+  margin-right: 0.4rem;
 }
 
-.stars-selection label {
-    margin-right: 15px;
-    font-size: 1.8em; /* Tamaño de estrella */
-    cursor: pointer;
-    transition: color 0.2s ease;
+.rating-form-modern .material-icons.star-icon {
+  font-size: 1.5rem;
+  color: #DA443F;
 }
 
-.stars-selection input[type="radio"] {
-    display: none; /* Ocultar el input de radio nativo */
+.rating-form-modern select,
+.rating-form-modern button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
 }
 
-.stars-selection .star-icon {
-    color: var(--star-empty-color); /* Color por defecto */
-    transition: color 0.2s ease;
+.rating-form-modern button {
+  background-color: #DA443F;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-/* Efecto de hover y checked para estrellas */
-.stars-selection label:hover .star-icon,
-.stars-selection input[type="radio"]:checked ~ label .star-icon,
-.stars-selection input[type="radio"]:checked + .star-icon {
-    color: var(--star-filled-color);
-}
-/* Asegura que al pasar el ratón, las estrellas anteriores también se llenen */
-.stars-selection label:hover ~ label .star-icon {
-    color: var(--star-empty-color); /* Las estrellas posteriores vuelven a estar vacías en hover */
-}
-
-
-.form-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--input-border);
-    border-radius: 6px;
-    background-color: var(--input-bg);
-    color: var(--light-text-color);
-    font-size: 1em;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    appearance: none; /* Eliminar estilo nativo de select */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ff8c00%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.4H18.2c-4.2%200-8.3%201.7-11.4%204.8-3.1%203.1-4.8%207.2-4.8%2011.4v56.6h292.4V84.6c0-4.2-1.7-8.3-4.8-11.4zM274.6%20223a17.6%2017.6%200%200%200%2013.2%206.4H18.2c-4.2%200-8.3-1.7-11.4-4.8-3.1-3.1-4.8-7.2-4.8-11.4V150h292.4v56.6c0%204.2-1.7%208.3-4.8%2011.4z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha SVG naranja */
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    background-size: 14px;
-    padding-right: 40px; /* Espacio para la flecha */
-}
-
-.submit-btn {
-    background-color: var(--accent-color);
-    color: var(--dark-background);
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
-    max-width: 250px;
-    display: block; /* Para que margin auto funcione */
-    margin: 0 auto; /* Centrar el botón */
-}
-
-.submit-btn:hover {
-    background-color: #ff9d26; /* Naranja ligeramente más claro */
-    transform: translateY(-2px);
-}
-
-
-/* Media Queries for Responsiveness */
-@media (min-width: 768px) {
-    .recipe-card-modern {
-    background-color: var(--card-background);
-    border-radius: 16px;
-    box-shadow: 0 10px 15px var(--shadow-color);
-    overflow: hidden; /* Para que los bordes redondeados se apliquen correctamente */
-    display: grid;
-    grid-template-columns: 1fr; /* Por defecto, una columna */
-    max-width: 1000}px; Ancho máximo similar al original
-    width: 100%; /* Ocupa el ancho disponible */
-    margin: 0 auto; /* Centrar la tarjeta */
-    border: 3px dotted var(--red-accent-color); /* Borde rojo punteado */
-}
-
-    .image-section {
-        padding: 2.5rem; /* Más padding en pantallas más grandes */
-    }
-
-    .recipe-title-modern {
-        font-size: 3rem; /* Más grande en desktop */
-    }
-
-    .recipe-details-grid {
-        grid-template-columns: 1fr 1fr; /* Dos columnas para detalles */
-    }
-}
-
-@media (max-width: 600px) {
-    .recipe-card-modern {
-        padding: 0; /* Eliminar padding del contenedor principal en móviles */
-        border-radius: 0; /* Quitar redondez en móviles para ocupar todo el ancho */
-    }
-
-    .image-section,
-    .details-section {
-        padding: 1.5rem; /* Reducir padding */
-    }
-
-    .recipe-title-modern {
-        font-size: 2rem;
-        text-align: center;
-    }
-
-    .recipe-description-modern {
-        font-size: 0.9em;
-        text-align: center;
-    }
-
-    .recipe-details-grid {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.8rem;
-    }
-
-    .detail-item {
-        justify-content: center; /* Centrar items de detalle */
-        font-size: 0.9em;
-    }
-
-    .section-title-modern {
-        font-size: 1.5rem;
-        text-align: center;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-    }
-
-    .ingredient-list-modern li,
-    .steps-list-modern li {
-        font-size: 0.9em;
-    }
-
-    .favorite-section {
-        margin-bottom: 1.5rem;
-    }
-
-    .favorite-btn {
-        width: 100%;
-        font-size: 0.95em;
-        padding: 8px 15px;
-    }
-
-    .rating-form-modern {
-        margin-top: 1.5rem;
-        padding-top: 1rem;
-    }
-
-    .form-label {
-        font-size: 0.95em;
-    }
-
-    .stars-selection label {
-        margin-right: 10px;
-        font-size: 1.5em;
-    }
-
-    .submit-btn {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+.rating-form-modern button:hover {
+  background-color: #c6382e;
 }

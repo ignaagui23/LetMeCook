@@ -26,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (password_verify($password, $usuario["password"])) {
                 $_SESSION["usuario"] = $usuario["username"];
                 $_SESSION["es_admin"] = $usuario["is_admin"];
+                $_SESSION["usuario_id"] = $usuario["id"];   
+
                 header("Location: ../Vistas/index.php");
                 exit();
             } else {
