@@ -37,7 +37,7 @@ $resultado = $conn->query($sql);
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Panel Admin | Usuarios</title>
   <link rel="stylesheet" href="../Estilos/styles.css" />
-  <link rel="stylesheet" href="../Estilos/style_recetas.css" />
+<link rel="stylesheet" href="../Estilos/style_recetas.css">
 </head>
 <body>
   <?php include 'header.php'; ?>

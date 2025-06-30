@@ -1,172 +1,248 @@
+/* LetMeCook Unified Style */
+
+/* Layout */
 .receta-layout {
-  padding: 2rem 1rem; /* Menos padding a los costados */
-  width: 70%;
-  margin: auto;
-  background-color: #f7f3f1;
-    flex-direction: column;
-    align-items: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-
-
+  padding: 2rem;
+  width: 90%;
+  margin: 2rem auto;
+  background: #f7f3f1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Profile Section */
+.perfil-usuario, .perfil-flex {
+  align-self: center;
+  justify-content: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 2rem;
+  width: 100%;
+}
+.foto-perfil img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #DA443F;
+  background: #fff;
+}
+.datos-usuario {
+  flex: 1;
+}
+.datos-usuario h2 {
+  margin: 0;
+  color: #c6382e;
+}
+.datos-usuario hr {
+  border: none;
+  border-top: 1px solid #d4847f;
+  margin: 0.5rem 0 1rem 0;
+}
+.datos-usuario p {
+  margin: 0.4rem 0;
+}
+
+/* Admin Actions */
+.acciones-admin {
+  margin: 2rem 0;
+  background: #fff;
+  border: 2px dashed #DA443F;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+.acciones-admin form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Recipe Top */
 .receta-top {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-        justify-content: space-evenly;
-
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2rem;
 }
-
-
 .receta-imagen img {
   width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   border-radius: 1rem;
-  border: 1.7px #8a8a8a;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  margin: 5%;
+  border: 2px solid #8a8a8a;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  object-fit: cover;
 }
-
 .receta-info {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
   width: 50%;
   justify-content: center;
   text-align: center;
 }
-
 .receta-info h1 {
   color: #c6382e;
   margin-bottom: 0;
 }
-
 .receta-info hr {
   border: none;
   border-top: 1px solid #d4847f;
   width: 100%;
 }
-
 .receta-info .descripcion {
   color: #444;
   font-size: 1rem;
   font-style: italic;
 }
 
+/* Key Info Grid */
 .info-clave {
-    display: grid; /* Cambiamos a grid */
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual ancho */
-    grid-template-rows: repeat(2, auto); /* Dos filas, altura automática */
-    gap: 40px; /* Espacio entre los elementos del grid */
-    width: 100%;
-    color: #333;
-    align-items: center; /* Centra verticalmente los elementos en sus celdas */
-    justify-items: start; /* Alinea los elementos a la izquierda en sus celdas */
-    margin-top: 5.2rem; /* Agrega espacio arriba para separarlo de receta-info */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 100%;
+  color: #333;
+  align-items: center;
+  justify-items: start;
+  margin-top: 3rem;
 }
-
 .info-clave span {
-    display: flex; /* Para alinear el icono y el texto */
-    align-items: center; /* Centra verticalmente el icono con el texto */
+  display: flex;
+  align-items: center;
 }
-
 .info-clave i {
-    color: #DA443F;
-    margin-right: 0.5rem; /* Un poco más de espacio entre el icono y el texto */
+  color: #DA443F;
+  margin-right: 0.5rem;
 }
 
+/* Favorite Button */
 .favorite-btn {
-  background-color: #DA443F;
-  color: white;
-  padding: 0.5rem 1rem;
+  background: #DA443F;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
   border-radius: 0.7rem;
   border: none;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.2s;
+}
+.favorite-btn:hover {
+  background: #c6382e;
 }
 
-.favorite-btn:hover {
-  background-color: #c6382e;
-}
+/* Recipe Sections */
 .receta-secciones {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
 }
 
-.tarjeta-receta {
-    border: 3px dashed #DA443F;
-    padding: 1.5rem;
-    border-radius: 1.2rem;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    flex: 1;
-    min-width: 300px;
+/* Recipe Card */
+.tarjeta-receta, .card-receta {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 2px dashed #DA443F;
+  padding: 1.5rem;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
 }
-
-.tarjeta-receta h2 {
-    color: #c6382e;
-    margin-bottom: 1rem;
-    text-align: center;
+.card-receta:hover, .tarjeta-receta:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
-
-.tarjeta-receta hr {
-    border: 1px solid #eb6e6a;
-    margin: 1.5rem 0;
+.tarjeta-receta h2, .card-receta h2 {
+  color: #c6382e;
+  margin-bottom: 1rem;
+  text-align: center;
 }
-
+.tarjeta-receta hr, .card-receta hr {
+  border: 1px solid #eb6e6a;
+  margin: 1.2rem 0;
+}
 .tarjeta-receta ul p,
-.tarjeta-receta ol p, 
+.tarjeta-receta ol p,
 .tarjeta-receta ol li {
-    margin-bottom: 0.8rem;
-    position: relative;
-    line-height: 1.4;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
 }
-
-/* Poner el número junto al texto del <li> */
 .tarjeta-receta ol {
-    list-style-position: inside;
+  list-style-position: inside;
 }
-
 li::marker {
-    color: #c6382e;
-    font-weight: bold;
+  color: #c6382e;
+  font-weight: bold;
 }
-
 .tarjeta-receta p b {
-    color: #c6382e;
-    margin: 3%;
+  color: #c6382e;
 }
-
 .tarjeta-receta p {
-    line-height: 30px;
+  line-height: 1.7;
+}
+.card-img img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.card-contenido {
+  padding: 1rem 0 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+/* Grid for Recipe Cards */
+.grid-recetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Rating Form */
 .rating-form-modern {
-  background-color: #fff;
+  background: #fff;
   border-radius: 1rem;
   padding: 1.5rem;
   border: 2px solid #c6382e;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto;
 }
-
 .rating-form-modern h2 {
   color: #c6382e;
   margin-bottom: 1rem;
 }
-
 .rating-form-modern .stars-selection label {
   margin-right: 0.4rem;
 }
-
 .rating-form-modern .material-icons.star-icon {
   font-size: 1.5rem;
   color: #DA443F;
 }
-
 .rating-form-modern select,
 .rating-form-modern button {
   margin-top: 1rem;
@@ -175,14 +251,47 @@ li::marker {
   border-radius: 0.5rem;
   border: 1px solid #ccc;
 }
-
 .rating-form-modern button {
-  background-color: #DA443F;
-  color: white;
+  background: #DA443F;
+  color: #fff;
   border: none;
   cursor: pointer;
+  transition: background 0.2s;
+}
+.rating-form-modern button:hover {
+  background: #c6382e;
 }
 
-.rating-form-modern button:hover {
-  background-color: #c6382e;
+/* Responsive */
+@media (max-width: 900px) {
+  .receta-top {
+    flex-direction: column;
+    align-items: center;
+  }
+  .receta-info, .receta-imagen {
+    width: 100%;
+    max-width: 100%;
+  }
+  .info-clave {
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 700px) {
+  .perfil-usuario, .perfil-flex, .acciones-admin, .receta-layout {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  .perfil-usuario, .perfil-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .datos-usuario {
+    width: 100%;
+  }
+  .receta-secciones {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

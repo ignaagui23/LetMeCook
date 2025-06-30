@@ -1,0 +1,134 @@
+/* style_usuario.css - Estilos específicos para la vista de usuario en admin */
+
+
+/* Contenedor principal del perfil */
+.perfil-flex {
+  margin: 5%;
+  display: flex;
+  gap: 2rem;
+  align-self: center;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 75%;
+}
+
+/* Imagen de perfil */
+.perfil-flex img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #DA443F;
+  background-color: #fff;
+}
+
+/* Datos del usuario */
+.datos-usuario {
+  flex: 1;
+}
+
+.datos-usuario h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #C6382E;
+}
+
+.datos-usuario p {
+  margin: 0.3rem 0;
+  color: #444;
+}
+
+.datos-usuario hr {
+  margin: 0.8rem 0 1rem;
+  border: none;
+  border-top: 1px solid #d4847f;
+}
+
+/* Sección de acciones admin */
+.acciones-admin {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fdf7f6;
+  border: 2px dashed #DA443F;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.acciones-admin form {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.acciones-admin select,
+.acciones-admin button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.acciones-admin button {
+  background-color: #DA443F;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.acciones-admin button:hover {
+  background-color: #c6382e;
+}
+
+/* Botón de borrar con estilo especial */
+.acciones-admin button[name="borrar"] {
+  background-color: #e74c3c;
+}
+
+.acciones-admin button[name="borrar"]:hover {
+  background-color: #c0392b;
+}
+
+/* Título recetas */
+h3 {
+  text-align: center;
+  color: #c6382e;
+  margin-top: 3rem;
+}
+
+/* Volver al panel */
+a[href*="dashboard_usuarios.php"] {
+  display: inline-block;
+  margin: 2rem auto 0;
+  text-align: center;
+  color: #DA443F;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a[href*="dashboard_usuarios.php"]:hover {
+  text-decoration: underline;
+}
+
+/* Adaptación responsive */
+@media (max-width: 768px) {
+  .perfil-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .acciones-admin form {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .datos-usuario {
+    width: 100%;
+  }
+}

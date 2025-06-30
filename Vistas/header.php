@@ -35,9 +35,10 @@ if (isset($_GET['logout'])) {
 
     <?php if (isset($_SESSION["usuario"])): ?>
       <div class="user-info">
-        <a href="cuenta.php">
-        <span class="username"><?php echo htmlspecialchars($_SESSION["usuario"]); ?></span>
-        </a>
+<a href="perfil.php?id=<?php echo $_SESSION['usuario_id']; ?>">
+  <span class="username"><?php echo htmlspecialchars($_SESSION["usuario"]); ?></span>
+</a>
+
 <?php
 // Ruta por defecto si no hay foto
 $foto = !empty($_SESSION['foto_perfil']) && file_exists("../Img/pfp/" . $_SESSION['foto_perfil'])
