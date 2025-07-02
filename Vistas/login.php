@@ -44,5 +44,8 @@
             document.getElementById('form-login').classList.remove('oculto');
         }
     </script>
+    
+<?php include 'footer.php'; ?>
+
 </body>
 </html>

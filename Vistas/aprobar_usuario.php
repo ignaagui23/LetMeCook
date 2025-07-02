@@ -174,6 +174,7 @@ $penalizado = !empty($usuario['penalizado_hasta']) && strtotime($usuario['penali
   </div>
 
   <p style="margin-top: 1rem;"><a href="dashboard_usuarios.php">← Volver al panel</a></p>
-  </main>
+</main>
+<?php include 'footer.php'; ?>
 </body>
 </html>

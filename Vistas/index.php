@@ -41,7 +41,10 @@ function scrollCarousel(direction) {
 <body>
   <?php include 'header.php'; ?>
   <main>
-    <h2>Recomendadas</h2>
+<div class="titulo-recuadro">
+  <h2>Recomendadas</h2>
+</div>
+
     <div class="carousel">
   <button class="arrow left" onclick="scrollCarousel(-1)">&#x276E;</button>
   <div class="card-container" id="carouselContainer">
@@ -64,5 +67,17 @@ function scrollCarousel(direction) {
 </div>
 
   </main>
+
+  <section class="hero-receta">
+  <div class="hero-contenido">
+    <h2>¡Crea tu propia receta!</h2>
+    <p>¿Tenés una idea deliciosa? Compartila con el mundo.</p>
+    <a href="crear_receta.php" class="btn-crear">Crear receta</a>
+  </div>
+</section>
+
+<?php include 'footer.php'; ?>
+
+
 </body>
 </html>
