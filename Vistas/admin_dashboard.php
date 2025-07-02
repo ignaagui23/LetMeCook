@@ -108,5 +108,6 @@ $ultimoUsuario = $conn->query("SELECT username, fecha_creacion FROM usuarios ORD
     </div>
   </main>
   <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 </body>
 </html>

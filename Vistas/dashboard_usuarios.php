@@ -85,5 +85,6 @@ $resultado = $conn->query($sql);
     </div>
   </main>
   <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 </body>
 </html>

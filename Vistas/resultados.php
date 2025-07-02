@@ -80,5 +80,6 @@ $resultado = $stmt->get_result();
         <?php endif; ?>
     </main>
     <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 </body>
 </html>

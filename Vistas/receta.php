@@ -102,15 +102,9 @@ $receta = $resultado->fetch_assoc();
         </div>
 
         <!-- Botón de favoritos -->
-        <?php if ($usuario_id): ?>
-          <form method="POST" action="../Controlador/favorito_toggle.php">
-              <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
-              <button type="submit" class="btn-fav">
-                  <?= $esFavorito ? '💔 Quitar de favoritos' : '❤️ Agregar a favoritos' ?>
-              </button>
-          </form>
-        <?php endif; ?>
 
+
+        
         <a href="perfil.php?id=<?= $receta['usuario_id'] ?>" style="text-decoration: none; color: inherit;">
             <div class="perfil-flex">
                 <div class="perfil-info">
@@ -134,6 +128,7 @@ $receta = $resultado->fetch_assoc();
         </a>    </div>
     </div>
     <br>
+
         <!-- Tarjetas punteadas verticales -->
         <div class="receta-secciones">
         <div class="tarjeta-receta">

@@ -1,14 +1,15 @@
 <?php
 session_start();
+
+
 require_once('../Controlador/conexion.php'); // Conexión a la DB
 
 // Si el usuario no está logueado, redirigirlo a login
-if (!isset($_SESSION["usuario"]["id"])) {
+if (!isset($_SESSION["usuario"])) {
     header("Location: login.php");
     exit();
 }
 
-$usuario_id = $_SESSION["usuario"]["id"];
 
 // Consulta para obtener las recetas favoritas del usuario
 // Se une la tabla 'recetas' con 'favoritos'
@@ -55,5 +56,6 @@ $favoritos = $consulta->get_result();
             <?php endif; ?>
         </div>
     </main>
+<?php include 'footer.php'; ?>
 </body>
 </html>

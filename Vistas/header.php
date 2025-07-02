@@ -88,12 +88,6 @@ $foto = !empty($_SESSION['foto_perfil']) && file_exists("../Img/pfp/" . $_SESSIO
   Recetas
 </button>
 
-<button onclick="window.location.href='favoritos.php'" class="btn-agregar-receta">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-      Favoritos
-    </button> 
 
 <?php if (isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1): ?>
   <button onclick="window.location.href='admin_dashboard.php'" class="btn-agregar-receta">
