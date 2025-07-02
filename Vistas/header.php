@@ -27,6 +27,13 @@ if (isset($_GET['logout'])) {
           <rect y="60" width="100" height="10"></rect>
         </svg>
       </button>
+
+      <form class="buscar-form" action="../Vistas/resultados.php" method="GET">
+  <input type="text" name="q" class="buscar-input" placeholder="Buscar receta...">
+  <button type="submit" class="buscar-btn">Buscar</button>
+</form>
+
+
     <?php endif; ?>
 
     <div class="logo">
@@ -77,6 +84,13 @@ $foto = !empty($_SESSION['foto_perfil']) && file_exists("../Img/pfp/" . $_SESSIO
  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
   Recetas
 </button>
+
+<button onclick="window.location.href='favoritos.php'" class="btn-agregar-receta">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+      Favoritos
+    </button> 
 
 <?php if (isset($_SESSION["es_admin"]) && $_SESSION["es_admin"] == 1): ?>
   <button onclick="window.location.href='admin_dashboard.php'" class="btn-agregar-receta">

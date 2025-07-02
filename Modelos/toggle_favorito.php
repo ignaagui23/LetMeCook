@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('../Modelos/conexion.php');
+require_once('../Controlador/conexion.php');
 
 $usuario_id = $_SESSION["usuario"]["id"] ?? null;
 $receta_id = $_POST['receta_id'] ?? null;

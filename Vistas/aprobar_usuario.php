@@ -146,6 +146,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <p style="margin-top: 1rem;"><a href="dashboard_usuarios.php">← Volver al panel</a></p>
 </main>
-
+<?php include 'footer.php'; ?>
 </body>
 </html>

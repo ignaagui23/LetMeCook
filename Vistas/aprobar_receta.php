@@ -175,6 +175,6 @@ $conn->close();
   background-color: #c82333;
 }
 </style>
-
+<?php include 'footer.php'; ?>
 </body>
 </html>

@@ -177,6 +177,6 @@ function agregarIngrediente() {
         }
         ?>
     </select>
-
+<?php include 'footer.php'; ?>
 </body>
 </html>

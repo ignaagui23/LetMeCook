@@ -106,12 +106,9 @@ $conn->close();
         <span><i class="material-icons">star</i> <?= $promedio ?>/5</span>
       </div>
 
-      <?php if ($usuario_id): ?>
-        <form method="post" action="../Modelos/toggle_favorito.php">
-          <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
-          <button type="submit" class="favorite-btn"><?= $esFavorito ? '★ Favorito' : '☆ Añadir a favoritos' ?></button>
-        </form>
-      <?php endif; ?>
+     
+
+    
 
     </div>
     <!-- Fin de la información general -->
@@ -137,39 +134,14 @@ $conn->close();
       </div>
     </div>
 
-    <?php if ($usuario_id): ?>
-      <div class="rating-form-modern">
-        <h2>Valorar receta</h2>
-        <form method="post" action="../Modelos/valorar.php">
-          <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
-
-          <label>Tu valoración (1 a 5):</label>
-          <div class="stars-selection">
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-              <label>
-                <input type="radio" name="puntuacion" value="<?= $i ?>" <?= ($i == $puntuacion_usuario) ? 'checked' : '' ?>>
-                <span class="material-icons star-icon"><?= ($i <= $puntuacion_usuario) ? 'star' : 'star_border' ?></span>
-              </label>
-            <?php endfor; ?>
-          </div>
-
-          <label>Dificultad:</label>
-          <select name="dificultad">
-            <option value="">Seleccionar</option>
-            <option value="Fácil" <?= ($receta['dificultad'] == 'Fácil') ? 'selected' : '' ?>>Fácil</option>
-            <option value="Media" <?= ($receta['dificultad'] == 'Media') ? 'selected' : '' ?>>Media</option>
-            <option value="Difícil" <?= ($receta['dificultad'] == 'Difícil') ? 'selected' : '' ?>>Difícil</option>
-          </select>
-
-          <button type="submit">Enviar valoración</button>
+      <?php if (true): // El botón solo aparece si el usuario inició sesión ?>
+        <form method="post" action="../Modelos/toggle_favorito.php">
+            <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
+            <button type="submit" class="favorite-btn">
+                <?= $esFavorito ? '★ Quitar de favoritos' : '☆ Añadir a favoritos' ?>
+            </button>
         </form>
-      </div>
     <?php endif; ?>
   </div>
-</main>
-
-  </main>
-
-
 </body>
 </html>

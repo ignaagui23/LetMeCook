@@ -1,5 +1,5 @@
 header {
-  background-color: #DA443F;
+  background: linear-gradient(135deg, #c6382e, #8f1e1a); /* antes era background-color: #DA443F; */
   height: 2vh;
   min-height: 100px;
   display: flex;
@@ -167,4 +167,40 @@ header {
 
 a {
   text-decoration: none;
+}
+
+/* Barra de búsqueda en header */
+
+.buscar-form {
+  position: absolute;
+  top: 50%;
+  left: 70px; /* justo al lado derecho del botón hamburguesa */
+  transform: translateY(-50%);
+  width: 300px;
+  max-width: 80vw;
+  display: flex;
+}
+
+.buscar-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px 0 0 20px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.buscar-btn {
+  background-color: #b11c17;
+  color: white;
+  border: none;
+  padding: 0 1rem;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.buscar-btn:hover {
+  background-color: #8f1512;
 }

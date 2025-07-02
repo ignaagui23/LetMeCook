@@ -59,5 +59,6 @@ $resultado = obtenerRecetas($orden);
       <?php endwhile; ?>
     </div>
   </main>
+  <?php include 'footer.php'; ?>
 </body>
 </html>

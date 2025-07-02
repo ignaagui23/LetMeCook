@@ -78,5 +78,6 @@ $resultadoRecetas = $stmtRecetas->get_result();
       <?php endif; ?>
     </div>
   </main>
+  <?php include 'footer.php'; ?>
 </body>
 </html>
