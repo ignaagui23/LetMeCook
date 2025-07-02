@@ -1,175 +1,154 @@
-<?php
-session_start();
-// Las rutas deben ser correctas desde Vistas/
-require_once('../Controlador/conexion.php'); // Asegúrate que esta ruta es correcta
+    <?php
+    session_start();
+    // Las rutas deben ser correctas desde Vistas/
+    require_once('../Controlador/conexion.php'); // Asegúrate que esta ruta es correcta
 
-if (!isset($_GET['id'])) {
-    header("Location: recetas.php"); // Asegúrate que esta ruta es correcta para redirección
-    exit();
-}
+    if (!isset($_GET['id'])) {
+        header("Location: recetas.php"); // Asegúrate que esta ruta es correcta para redirección
+        exit();
+    }
 
-$receta_id = intval($_GET['id']);
-$usuario_id = $_SESSION["usuario"]["id"] ?? null;
+    $receta_id = intval($_GET['id']);
+    $usuario_id = $_SESSION["usuario"]["id"] ?? null;
 
-// Consulta de la receta y el autor
-$consulta = $conn->prepare("SELECT r.*, u.username FROM recetas r JOIN usuarios u ON r.usuario_id = u.id WHERE r.id = ?");
+    // Consulta de la receta y el autor
+$consulta = $conn->prepare("SELECT 
+                              r.id AS receta_id,
+                              r.titulo,
+                              r.descripcion AS descripcion_receta,
+                              r.imagen,
+                              r.fecha_creacion AS receta_fecha,
+                              r.tiempo_preparacion,
+                              r.dificultad,
+                              u.id AS usuario_id,
+                              u.username,
+                              u.foto_perfil,
+                              u.descripcion AS descripcion_usuario,
+                              u.fecha_creacion AS usuario_fecha_creacion
+                            FROM recetas r
+                            JOIN usuarios u ON r.usuario_id = u.id
+                            WHERE r.id = ?");
 $consulta->bind_param("i", $receta_id);
 $consulta->execute();
 $resultado = $consulta->get_result();
 $receta = $resultado->fetch_assoc();
 
-if (!$receta) {
-    echo "Receta no encontrada.";
-    exit();
-}
 
-// Ingredientes de la receta
-$ingredientes = $conn->query("
-    SELECT i.nombre, ri.cantidad, ri.unidad
-    FROM receta_ingrediente ri
-    JOIN ingredientes i ON ri.ingrediente_id = i.id
-    WHERE ri.receta_id = $receta_id
-");
 
-// Pasos de la receta
-$pasos = $conn->query("
-    SELECT numero_paso, descripcion
-    FROM pasos
-    WHERE receta_id = $receta_id
-    ORDER BY numero_paso ASC
-");
-
-// Verificar si es favorito
-$esFavorito = false;
-if ($usuario_id) {
-    $favCheck = $conn->prepare("SELECT * FROM favoritos WHERE usuario_id = ? AND receta_id = ?");
-    $favCheck->bind_param("ii", $usuario_id, $receta_id);
-    $favCheck->execute();
-    $esFavorito = $favCheck->get_result()->num_rows > 0;
-}
-
-// Promedio de puntuación
-$promedioQuery = $conn->query("SELECT AVG(puntuacion) as promedio FROM puntuaciones WHERE receta_id = $receta_id");
-$promedio = round($promedioQuery->fetch_assoc()['promedio'] ?? 0, 1);
-
-// Obtener la puntuación del usuario actual (si existe) para preseleccionar las estrellas
-$puntuacion_usuario = 0;
-if ($usuario_id) {
-    $userPuntQuery = $conn->prepare("SELECT puntuacion FROM puntuaciones WHERE usuario_id = ? AND receta_id = ?");
-    $userPuntQuery->bind_param("ii", $usuario_id, $receta_id);
-    $userPuntQuery->execute();
-    $userPuntResult = $userPuntQuery->get_result();
-    if ($userPuntResult->num_rows > 0) {
-        $puntuacion_usuario = $userPuntResult->fetch_assoc()['puntuacion'];
+    if (!$receta) {
+        echo "Receta no encontrada.";
+        exit();
     }
-}
 
-// Obtener dificultad del usuario (si existe)
-$dificultad_usuario = '';
-if ($usuario_id) {
+    // Ingredientes de la receta
+    $ingredientes = $conn->query("
+        SELECT i.nombre, ri.cantidad, ri.unidad
+        FROM receta_ingrediente ri
+        JOIN ingredientes i ON ri.ingrediente_id = i.id
+        WHERE ri.receta_id = $receta_id
+    ");
 
-}
+    // Pasos de la receta
+    $pasos = $conn->query("
+        SELECT numero_paso, descripcion
+        FROM pasos
+        WHERE receta_id = $receta_id
+        ORDER BY numero_paso ASC
+    ");
 
-// Cerrar conexión (opcional, pero buena práctica si no se va a usar más)
-$conn->close();
-?>
+    // Verificar si es favorito
+    $esFavorito = false;
+    if ($usuario_id) {
+        $favCheck = $conn->prepare("SELECT * FROM favoritos WHERE usuario_id = ? AND receta_id = ?");
+        $favCheck->bind_param("ii", $usuario_id, $receta_id);
+        $favCheck->execute();
+        $esFavorito = $favCheck->get_result()->num_rows > 0;
+    }
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= htmlspecialchars($receta['titulo']) ?> | Let Me Cook</title>
-  <link rel="stylesheet" href="../Estilos/style_receta.css?v=1.0">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body class="flex-center-body"> <?php include 'header.php'; // Asegúrate que la ruta es correcta ?>
+    // Cerrar conexión (opcional, pero buena práctica si no se va a usar más)
+    $conn->close();
+    ?>
 
-  <main>
-  <div class="receta-layout">
-<div class="receta-top">
-    <!-- Imagen -->
-    <div class="receta-imagen">
-      <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>">
-    </div>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($receta['titulo']) ?> | Let Me Cook</title>
+    <link rel="stylesheet" href="../Estilos/style_receta.css?v=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body class="flex-center-body"> <?php include 'header.php'; // Asegúrate que la ruta es correcta ?>
 
-    <!-- Información general -->
-    <div class="receta-info">
-      <h1><?= htmlspecialchars($receta['titulo']) ?></h1>
-      <hr>
-      <p class="descripcion"><?= nl2br(htmlspecialchars($receta['descripcion'])) ?></p>
+    <main>
+    <div class="receta-layout">
+    <div class="receta-top">
+        <div class="receta-imagen">
+        <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>">
+        </div>
 
-      <div class="info-clave">
-        <span><i class="material-icons">timer</i> <?= $receta['tiempo_preparacion'] ?> min</span>
-        <span><i class="material-icons">thermostat</i> <?= $receta['dificultad'] ?? 'No especificada' ?></span>
-        <span><i class="material-icons">person</i> <?= htmlspecialchars($receta['username']) ?></span>
-        <span><i class="material-icons">star</i> <?= $promedio ?>/5</span>
-      </div>
-
-      <?php if ($usuario_id): ?>
-        <form method="post" action="../Modelos/toggle_favorito.php">
-          <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
-          <button type="submit" class="favorite-btn"><?= $esFavorito ? '★ Favorito' : '☆ Añadir a favoritos' ?></button>
-        </form>
-      <?php endif; ?>
-
-    </div>
-    <!-- Fin de la información general -->
-  </div>
-    <!-- Tarjetas punteadas verticales -->
-    <div class="receta-secciones">
-      <div class="tarjeta-receta">
-        <h2>Ingredientes</h2>
+        <!-- Información general -->
+        <div class="receta-info">
+        <h1><?= htmlspecialchars($receta['titulo']) ?></h1>
         <hr>
-          <?php while($ing = $ingredientes->fetch_assoc()): ?>
-            <p><b> • </b><?= $ing['cantidad'] . ' ' . $ing['unidad'] . ' de ' . htmlspecialchars($ing['nombre']) ?></p>
-          <?php endwhile; ?>
-      </div>
+        <p class="descripcion"><?= htmlspecialchars($receta['descripcion_receta']) ?>
 
-      <div class="tarjeta-receta">
-        <h2>Pasos</h2>
-        <hr>
-        <ol>
-          <?php while($paso = $pasos->fetch_assoc()): ?>
-            <li><?= htmlspecialchars($paso['descripcion']) ?></li>
-          <?php endwhile; ?>
-        </ol>
-      </div>
+</p>
+
+        <div class="info-clave">
+            <span><i class="material-icons">timer</i><?= htmlspecialchars($receta['tiempo_preparacion']) ?>
+ min</span>
+            <span><i class="material-icons">thermostat</i> <?= $receta['dificultad'] ?? 'No especificada' ?></span>
+        </div>
+
+        <a href="perfil.php?id=<?= $receta['usuario_id'] ?>" style="text-decoration: none; color: inherit;">
+            <div class="perfil-flex">
+                <div class="perfil-info">
+                    <?php
+                        $ruta_foto = (!empty($receta['foto_perfil']) && file_exists("../Img/pfp/" . $receta['foto_perfil']))
+                            ? "../Img/pfp/" . htmlspecialchars($receta['foto_perfil'])
+                            : "../Img/pfp.jpg";
+                    ?>
+                    <img src="<?= $ruta_foto ?>" alt="Foto de <?= htmlspecialchars($receta['username']) ?>" />
+                    <div class="datos-usuario">
+                        <h2><?= htmlspecialchars($receta['username']) ?></h2><br
+                        <p><strong>Miembro desde:</strong> <?= date('d/m/Y', strtotime($receta['usuario_fecha_creacion'])) ?></p>
+                                            </div>
+
+                </div>
+                                        <hr>
+
+                                        <p><em><?= htmlspecialchars($receta['descripcion_usuario'] ?: "Amante de la cocina y explorador de sabores.") ?></em></p>
+
+            </div>
+        </a>    </div>
     </div>
+    <br>
+        <!-- Tarjetas punteadas verticales -->
+        <div class="receta-secciones">
+        <div class="tarjeta-receta">
+            <h2>Ingredientes</h2>
+            <hr>
+            <?php while($ing = $ingredientes->fetch_assoc()): ?>
+                <p><b> • </b><?= $ing['cantidad'] . ' ' . $ing['unidad'] . ' de ' . htmlspecialchars($ing['nombre']) ?></p>
+            <?php endwhile; ?>
+        </div>
 
-    <?php if ($usuario_id): ?>
-      <div class="rating-form-modern">
-        <h2>Valorar receta</h2>
-        <form method="post" action="../Modelos/valorar.php">
-          <input type="hidden" name="receta_id" value="<?= $receta_id ?>">
+        <div class="tarjeta-receta">
+            <h2>Pasos</h2>
+            <hr>
+            <ol>
+            <?php while($paso = $pasos->fetch_assoc()): ?>
+                <li><?= htmlspecialchars($paso['descripcion']) ?></li>
+            <?php endwhile; ?>
+            </ol>
+        </div>
+        </div>
+    </div>
+    </main>
 
-          <label>Tu valoración (1 a 5):</label>
-          <div class="stars-selection">
-            <?php for ($i = 1; $i <= 5; $i++): ?>
-              <label>
-                <input type="radio" name="puntuacion" value="<?= $i ?>" <?= ($i == $puntuacion_usuario) ? 'checked' : '' ?>>
-                <span class="material-icons star-icon"><?= ($i <= $puntuacion_usuario) ? 'star' : 'star_border' ?></span>
-              </label>
-            <?php endfor; ?>
-          </div>
-
-          <label>Dificultad:</label>
-          <select name="dificultad">
-            <option value="">Seleccionar</option>
-            <option value="Fácil" <?= ($receta['dificultad'] == 'Fácil') ? 'selected' : '' ?>>Fácil</option>
-            <option value="Media" <?= ($receta['dificultad'] == 'Media') ? 'selected' : '' ?>>Media</option>
-            <option value="Difícil" <?= ($receta['dificultad'] == 'Difícil') ? 'selected' : '' ?>>Difícil</option>
-          </select>
-
-          <button type="submit">Enviar valoración</button>
-        </form>
-      </div>
-    <?php endif; ?>
-  </div>
-</main>
-
-  </main>
+    </main>
 
 
-</body>
-</html>
+    </body>
+    </html>

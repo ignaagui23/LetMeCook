@@ -12,7 +12,7 @@ if (!$username_sesion) {
 require_once '../Controlador/conexion.php'; // Debe definir $conn
 
 // Obtener datos del usuario
-$stmt = $conn->prepare('SELECT id, username, email, password, foto_perfil FROM usuarios WHERE username = ?');
+$stmt = $conn->prepare('SELECT id, username, email, password, foto_perfil, descripcion FROM usuarios WHERE username = ?');
 $stmt->bind_param('s', $username_sesion);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -87,6 +87,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 session_destroy();
                 header('Location: login.php');
                 exit;
+
+                case 'cambiar_descripcion':
+    $nueva_descripcion = trim($_POST['nueva_descripcion'] ?? '');
+
+    // Limitar largo o limpiar si querés más control
+    if (strlen($nueva_descripcion) > 1000) {
+        $errors[] = 'La descripción es demasiado larga (máx. 1000 caracteres).';
+    } else {
+        $upd = $conn->prepare('UPDATE usuarios SET descripcion = ? WHERE id = ?');
+        $upd->bind_param('si', $nueva_descripcion, $user_id);
+        $upd->execute();
+        $upd->close();
+        $success = 'Descripción actualizada correctamente.';
+    }
+    break;
+
 
 case 'cambiar_foto':
     if (isset($_FILES['nueva_foto']) && $_FILES['nueva_foto']['error'] === 0) {
@@ -188,6 +204,21 @@ case 'cambiar_foto':
                 <button type="submit">Actualizar</button>
             </form>
         </section>
+
+        <section class="form-section">
+    <h2>Editar Descripción</h2>
+    <form method="post">
+        <input type="hidden" name="action" value="cambiar_descripcion">
+        <label>Nueva descripción:<br>
+            <textarea name="nueva_descripcion" rows="4" style="width:100%; resize: vertical;"><?php echo htmlspecialchars($user['descripcion'] ?? ''); ?></textarea>
+        </label><br>
+        <label>Contraseña actual:<br>
+            <input type="password" name="current_password" required>
+        </label><br>
+        <button type="submit">Actualizar Descripción</button>
+    </form>
+</section>
+
 
         <section class="form-section">
     <h2>Foto de Perfil</h2>

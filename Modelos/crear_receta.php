@@ -11,8 +11,22 @@ $usuario_id = $_SESSION['usuario_id'];
 $titulo = $conn->real_escape_string($_POST['titulo']);
 $descripcion = $conn->real_escape_string($_POST['descripcion']);
 $tiempo_preparacion = (int)$_POST['tiempo_preparacion'];
+$dificultad = $_POST['dificultad'];
 $pasos = $_POST['pasos'] ?? [];
 $ingredientes = $_POST['ingredientes'] ?? [];
+
+// Verificar penalización
+$stmt = $conn->prepare("SELECT penalizado_hasta FROM usuarios WHERE id = ?");
+$stmt->bind_param("i", $_SESSION['usuario_id']);
+$stmt->execute();
+$pen = $stmt->get_result()->fetch_assoc();
+
+if ($pen['penalizado_hasta'] && strtotime($pen['penalizado_hasta']) > time()) {
+    $fecha_formateada = date('d/m/Y H:i', strtotime($pen['penalizado_hasta']));
+    header("Location: ../vistas/crear_receta.php?error=Estás penalizado hasta el $fecha_formateada y no podés subir recetas.");
+    exit();
+}
+    
 
 // Validar imagen
 if (!isset($_FILES['imagen']) || $_FILES['imagen']['error'] !== UPLOAD_ERR_OK) {
@@ -37,11 +51,12 @@ if (!move_uploaded_file($img_tmp, $img_dest)) {
 }
 
 // Insertar receta (sin dificultad)
-$sql = "INSERT INTO recetas (titulo, imagen, descripcion, tiempo_preparacion, usuario_id) 
-        VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO recetas (titulo, imagen, descripcion, tiempo_preparacion, dificultad, usuario_id) 
+        VALUES (?, ?, ?, ?, ?, ?)";
+
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('sssii', $titulo, $img_new_name, $descripcion, $tiempo_preparacion, $usuario_id);
+$stmt->bind_param('sssisi', $titulo, $img_new_name, $descripcion, $tiempo_preparacion, $dificultad, $usuario_id);
 
 if (!$stmt->execute()) {
     die("Error al insertar receta: " . $stmt->error);

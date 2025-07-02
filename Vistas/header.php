@@ -1,5 +1,8 @@
 <?php
 
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+
 if (isset($_GET['logout'])) {
   session_destroy();
   header("Location: login.php");

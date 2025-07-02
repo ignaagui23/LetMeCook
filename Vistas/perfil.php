@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION["usuario"])) {
+    header("Location: login.php");
+    exit();
+}
+
 require_once '../Controlador/conexion.php';
 
 $id = intval($_GET['id'] ?? 0);
@@ -9,7 +14,7 @@ if ($id === 0) {
 }
 
 // Obtener datos del usuario
-$stmt = $conn->prepare("SELECT id, username, fecha_creacion, foto_perfil FROM usuarios WHERE id = ?");
+$stmt = $conn->prepare("SELECT id, username, fecha_creacion, descripcion, foto_perfil FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $resultado = $stmt->get_result();
@@ -51,7 +56,7 @@ $resultadoRecetas = $stmtRecetas->get_result();
         <h2><?= htmlspecialchars($usuario['username']) ?></h2>
         <hr>
         <p><strong>Miembro desde:</strong> <?= date('d/m/Y', strtotime($usuario['fecha_creacion'])) ?></p>
-        <p><em>"Amante de la cocina y explorador de sabores. Siempre buscando compartir una buena receta con el mundo."</em></p>
+            <p><em><?= htmlspecialchars($usuario['descripcion'] ?: "Amante de la cocina y explorador de sabores.") ?></em></p>
       </div>
     </div>
 
@@ -59,7 +64,7 @@ $resultadoRecetas = $stmtRecetas->get_result();
 
     <div class="grid-recetas">
       <?php while ($receta = $resultadoRecetas->fetch_assoc()): ?>
-        <a href="detalle_receta.php?id=<?= $receta['id'] ?>" class="card-link">
+        <a href="receta.php?id=<?= $receta['id'] ?>" class="card-link">
           <div class="card-receta">
             <div class="card-img">
               <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>" />

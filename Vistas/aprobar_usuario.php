@@ -13,12 +13,14 @@ if ($id === 0) {
   exit;
 }
 
-// Obtener datos del usuario
-$stmt = $conn->prepare("SELECT id, username, email, fecha_creacion, foto_perfil, penalizado_hasta FROM usuarios WHERE id = ?");
+// Obtener datos del usuario (agregamos is_admin)
+$stmt = $conn->prepare("SELECT id, username, email, fecha_creacion, foto_perfil, penalizado_hasta, is_admin FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
+
+
 
 if (!$usuario) {
   echo "Usuario no encontrado.";
@@ -35,7 +37,7 @@ $stmtRecetas->bind_param("i", $id);
 $stmtRecetas->execute();
 $resultadoRecetas = $stmtRecetas->get_result();
 
-// POST: penalizar, despenalizar, borrar usuario
+// POST: penalizar, despenalizar, borrar usuario, cambiar admin
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['penalizar'])) {
     $horas = intval($_POST['horas'] ?? 1);
@@ -66,6 +68,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: dashboard_usuarios.php");
     exit;
   }
+
+  if (isset($_POST['toggle_admin'])) {
+    $nuevo_estado = $usuario['is_admin'] ? 0 : 1;
+    $toggleAdmin = $conn->prepare("UPDATE usuarios SET is_admin = ? WHERE id = ?");
+    $toggleAdmin->bind_param("ii", $nuevo_estado, $id);
+    $toggleAdmin->execute();
+    header("Location: aprobar_usuario.php?id=$id");
+    exit;
+  }
 }
 ?>
 
@@ -84,68 +95,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="perfil-flex">
 <?php
-          $ruta_foto = (!empty($usuario['foto_perfil']) && file_exists("../Img/pfp/" . $usuario['foto_perfil']))
-            ? "../Img/pfp/" . htmlspecialchars($usuario['foto_perfil'])
-            : "../Img/pfp.jpg";
-        ?>
+  $ruta_foto = (!empty($usuario['foto_perfil']) && file_exists("../Img/pfp/" . $usuario['foto_perfil']))
+    ? "../Img/pfp/" . htmlspecialchars($usuario['foto_perfil'])
+    : "../Img/pfp.jpg";
+?>
 
-              <img src="<?= $ruta_foto ?>" alt="Foto de <?= htmlspecialchars($usuario['username']) ?>" />
+  <img src="<?= $ruta_foto ?>" alt="Foto de <?= htmlspecialchars($usuario['username']) ?>" />
   <div class="datos-usuario">
     <h2><?= htmlspecialchars($usuario['username']) ?></h2>
     <hr>
+
     <p><strong>Email:</strong> <?= htmlspecialchars($usuario['email']) ?></p>
     <p><strong>Fecha de registro:</strong> <?= date('d/m/Y H:i', strtotime($usuario['fecha_creacion'])) ?></p>
-    <?php if ($usuario['penalizado_hasta'] && strtotime($usuario['penalizado_hasta']) > time()): ?>
-    <p style="color:red;"><strong>Penalizado hasta:</strong> <?= date('d/m/Y H:i', strtotime($usuario['penalizado_hasta'])) ?></p>
-    <?php else: ?>
-    <p style="color:green;"><strong>Estado:</strong> No penalizado</p>
-    <?php endif; ?>
+    <p><strong>Rol:</strong> <?= $usuario['is_admin'] ? 'Administrador' : 'Usuario común' ?></p>
+    <form method="post" style="margin-top: 0.5rem;">
+      <button type="submit" name="toggle_admin" style="background-color: #2980b9; color: white;">
+        <?= $usuario['is_admin'] ? 'Quitar rol de admin' : 'Hacer administrador' ?>
+      </button>
+    </form>
+<?php
+
+echo "Ahora: " . date('Y-m-d H:i:s') . "<br>";
+echo "Penalizado hasta: " . $usuario['penalizado_hasta'] . "<br>";
+echo "Comparación (timestamp): ahora = " . time() . ", penalizado = " . strtotime($usuario['penalizado_hasta']) . "<br>";
+$penalizado = !empty($usuario['penalizado_hasta']) && strtotime($usuario['penalizado_hasta']) !== false && strtotime($usuario['penalizado_hasta']) > time();
+?>
+
+<?php if ($penalizado): ?>
+  <p style="color:red;">
+    <strong>Penalizado hasta:</strong> <?= date('d/m/Y H:i', strtotime($usuario['penalizado_hasta'])) ?>
+  </p>
+<?php else: ?>
+  <p style="color:green;"><strong>Estado:</strong> No penalizado</p>
+<?php endif; ?>
+
+
+
     <div class="acciones-admin">
-  <form method="post">
-    <label for="horas">Penalizar por:</label>
-    <select name="horas" id="horas">
-    <option value="1">1 hora</option>
-    <option value="3">3 horas</option>
-    <option value="6">6 horas</option>
-    <option value="12">12 horas</option>
-    <option value="24">1 día</option>
-    </select>
-    <button type="submit" name="penalizar">Penalizar</button>
-    <button type="submit" name="despenalizar" onclick="return confirm('¿Seguro que querés quitar la penalización?')">Quitar penalización</button>
-    <button type="submit" name="borrar" style="background-color: #e74c3c; color: white;" onclick="return confirm('¡Atención! Esto borrará la cuenta y sus recetas. ¿Querés continuar?')">Borrar usuario</button>
-  </form>
+      <form method="post">
+        <label for="horas">Penalizar por:</label>
+        <select name="horas" id="horas">
+          <option value="1">1 hora</option>
+          <option value="3">3 horas</option>
+          <option value="6">6 horas</option>
+          <option value="12">12 horas</option>
+          <option value="24">1 día</option>
+        </select>
+        <button type="submit" name="penalizar">Penalizar</button>
+        <button type="submit" name="despenalizar" onclick="return confirm('¿Seguro que querés quitar la penalización?')">Quitar penalización</button>
+        <button type="submit" name="borrar" style="background-color: #e74c3c; color: white;" onclick="return confirm('¡Atención! Esto borrará la cuenta y sus recetas. ¿Querés continuar?')">Borrar usuario</button>
+      </form>
+    </div>
+  </div>
   </div>
 
-  </div>
-  
-  </div>
-    <h2 style="margin: 2rem;">Recetas creadas por <?= htmlspecialchars($usuario['username']) ?></h3>
-
+  <h2 style="margin: 2rem;">Recetas creadas por <?= htmlspecialchars($usuario['username']) ?></h2>
 
   <div class="grid-recetas">
-    
-  <?php while ($receta = $resultadoRecetas->fetch_assoc()): ?>
-    <a href="aprobar_receta.php?id=<?= $receta['id'] ?>" class="card-link">
-    <div class="card-receta">
-      <div class="card-img">
-      <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>" />
-      </div>
-      <div class="card-contenido">
-      <h3><?= htmlspecialchars($receta['titulo']) ?></h3>
-      <hr />
-      <p><?= htmlspecialchars($receta['descripcion']) ?></p>
-      <small>Por <strong><?= htmlspecialchars($receta['username']) ?></strong> | <?= date('d/m/Y H:i', strtotime($receta['fecha_creacion'])) ?></small>
-      </div>
-    </div>
-    </a>
-  <?php endwhile; ?>
-  <?php if ($resultadoRecetas->num_rows === 0): ?>
-    <p>No hay recetas para mostrar.</p>
-  <?php endif; ?>
+    <?php while ($receta = $resultadoRecetas->fetch_assoc()): ?>
+      <a href="aprobar_receta.php?id=<?= $receta['id'] ?>" class="card-link">
+        <div class="card-receta">
+          <div class="card-img">
+            <img src="../Img/imgrecetas/<?= htmlspecialchars($receta['imagen']) ?>" alt="<?= htmlspecialchars($receta['titulo']) ?>" />
+          </div>
+          <div class="card-contenido">
+            <h3><?= htmlspecialchars($receta['titulo']) ?></h3>
+            <hr />
+            <p><?= htmlspecialchars($receta['descripcion']) ?></p>
+            <small>Por <strong><?= htmlspecialchars($receta['username']) ?></strong> | <?= date('d/m/Y H:i', strtotime($receta['fecha_creacion'])) ?></small>
+          </div>
+        </div>
+      </a>
+    <?php endwhile; ?>
+
+    <?php if ($resultadoRecetas->num_rows === 0): ?>
+      <p>No hay recetas para mostrar.</p>
+    <?php endif; ?>
   </div>
 
   <p style="margin-top: 1rem;"><a href="dashboard_usuarios.php">← Volver al panel</a></p>
-</main>
-
+  </main>
 </body>
 </html>
